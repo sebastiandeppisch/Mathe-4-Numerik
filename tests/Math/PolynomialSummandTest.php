@@ -55,4 +55,18 @@ class PolynomialSummandTest extends Testcase{
 
         $a->add($b);
     }
+
+    public function testEvaluateWithExponentNull(){
+        $a = new PolynomialSummand(10);
+        $this->assertEquals(10, $a->evaluate(1000));
+        $this->assertEquals(10, $a->evaluate(0));
+        $this->assertEquals(10, $a->evaluate(-1));
+    }
+
+    public function testEvaluateWithExponent(){
+        $a = new PolynomialSummand(10, 2);
+        $this->assertEquals(1000, $a->evaluate(10));
+        $this->assertEquals(10, $a->evaluate(1));
+        $this->assertEquals(0, $a->evaluate(0));
+    }
 }

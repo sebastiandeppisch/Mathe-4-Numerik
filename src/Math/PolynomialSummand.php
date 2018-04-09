@@ -1,6 +1,6 @@
 <?php
 namespace Math;
-class PolynomialSummand{
+class PolynomialSummand implements Evaluatable{
     private $variable;
 
     private $exponentiation;
@@ -32,5 +32,9 @@ class PolynomialSummand{
 
     public function getVariable(){
         return $this->variable;
+    }
+
+    public function evaluate(int $value):int {
+        return $this->number*pow($value, $this->exponentiation);
     }
 }
