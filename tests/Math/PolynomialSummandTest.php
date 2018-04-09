@@ -69,4 +69,37 @@ class PolynomialSummandTest extends Testcase{
         $this->assertEquals(10, $a->evaluate(1));
         $this->assertEquals(0, $a->evaluate(0));
     }
+
+    public function testMulNumber(){
+        $a = new PolynomialSummand(7);
+        $b = new PolynomialSummand(2);
+
+        $a->mul($b);
+        $this->assertEquals(14, $a->getNumber());
+        $this->assertEquals(0, $a->getExponentiation());
+    }
+
+    public function testMulExponentiation(){
+        $a = new PolynomialSummand(7, -3);
+        $b = new PolynomialSummand(2, 8);
+
+        $a->mul($b);
+        $this->assertEquals(14, $a->getNumber());
+        $this->assertEquals(-24, $a->getExponentiation());
+    }
+
+    public function testUnCopiedCanBeChanged(){
+        $a = new PolynomialSummand(42);
+        $b = $a;
+        $b->add(new PolynomialSummand(7));
+        $this->assertEquals(49, $a->getNumber());
+    }
+
+    public function testCopiedCanNotBeChanged(){
+        $a = new PolynomialSummand(42);
+        $b = $a->copy();
+        $b->add(new PolynomialSummand(7));
+        $this->assertEquals(42, $a->getNumber());
+        $this->assertEquals(49, $b->getNumber());
+    }
 }

@@ -37,4 +37,17 @@ class PolynomialSummand implements Evaluatable{
     public function evaluate(int $value):int {
         return $this->number*pow($value, $this->exponentiation);
     }
+
+    public function mul(PolynomialSummand $rhs):PolynomialSummand{
+        if($rhs->getVariable() !== $this->getVariable()){
+            throw new Exception\PolynomialSummand\WrongVariable();
+        }
+        $this->number*=$rhs->getNumber();
+        $this->exponentiation*=$rhs->getExponentiation();
+        return $this;
+    }
+
+    public function copy(){
+        return new PolynomialSummand($this->getNumber(), $this->getExponentiation(), $this->getVariable());
+    }
 }
