@@ -11,6 +11,7 @@
     ],
     "autoload":{
         "psr-4":{
+            "Controller\\":"src/Controller/",
             "Math\\":"src/Math/",
             "MathTest\\":"tests/Math/"
         }
