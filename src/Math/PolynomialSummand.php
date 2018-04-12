@@ -1,6 +1,6 @@
 <?php
 namespace Math;
-class PolynomialSummand implements Evaluatable{
+class PolynomialSummand implements EvaluatableInt{
     private $variable;
 
     private $exponentiation;

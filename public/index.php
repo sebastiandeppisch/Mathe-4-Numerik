@@ -6,7 +6,7 @@
 	if(isset($_GET["controller"])){
 		$controller = $_GET["controller"];
 	}
-	$controller = new \Controller\MainController("PolynomExampleController");
+	$controller = new \Controller\MainController("FunctionExampleController");
 ?>
 
 <!DOCTYPE html>

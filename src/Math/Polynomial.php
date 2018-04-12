@@ -1,6 +1,6 @@
 <?php
 namespace Math;
-class Polynomial implements Evaluatable{
+class Polynomial implements EvaluatableInt{
     private $variable;
 
     private $summands=array();

@@ -1,5 +1,6 @@
 <?php
-class MFunction implements Evaluatable{
+namespace Math;
+class MFunction implements EvaluatableFloat{
 	private $func;
 	public function __construct(string $func){
 		$this->func=$func;
@@ -17,13 +18,15 @@ class MFunction implements Evaluatable{
 			$equation = preg_replace('!pi|π!', 'pi()', $equation);
 			eval('$result = '.$equation.';');
 		}else{
-			throw new Exception('Invalid equation:""'.$equation.'"');
+			throw new \Exception('Invalid equation:""'.$equation.'"');
 		}
 		return $result;
 	}
 
-	public function evaluate($value):int{
-		$func = str_replace("x", $value, $this->func);
-		return executeFunction($func);
+	public function evaluate(float $value):float{
+		$func = preg_replace("/([0-9]+)(x)/", "$1*$2", $this->func);
+		$func = str_replace("x", $value, $func);
+		$func = preg_replace("/([0-9]+)\^([0-9]+)/", "pow($1,$2)", $func);
+		return $this->executeEquation($func);
 	}
 }
