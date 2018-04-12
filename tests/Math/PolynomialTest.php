@@ -92,4 +92,10 @@ class PolynomialTest extends Testcase{
         $this->assertEquals("10x^2", $a->toString());
         $this->assertEquals("20x^2", $b->toString());
     }
+
+    public function testHTML(){
+        $a = new Polynomial();
+        $a->addString("4+10x^2+x^3");
+        $this->assertEquals("4+10x<sup>2</sup>+x<sup>3</sup>", $a->toHTML());
+    }
 }

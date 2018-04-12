@@ -145,4 +145,9 @@ class Polynomial implements Evaluatable{
         }
         return $result;
     }
+
+    public function toHTML():string{
+        $data = $this->toString();
+        return preg_replace("/\^([0-9+])/", "<sup>$1</sup>", $data);
+    }
 }

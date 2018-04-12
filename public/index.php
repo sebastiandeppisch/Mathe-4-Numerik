@@ -2,7 +2,11 @@
 	error_reporting(E_ALL);
 	require_once("../vendor/autoload.php");
 	ini_set('error_reporting', E_ALL);
-	$controller = new \Controller\MainController();
+	$controller = NULL;
+	if(isset($_GET["controller"])){
+		$controller = $_GET["controller"];
+	}
+	$controller = new \Controller\MainController("PolynomExampleController");
 ?>
 
 <!DOCTYPE html>
