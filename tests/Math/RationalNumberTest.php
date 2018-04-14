@@ -65,4 +65,17 @@ class RationalNumberTest extends Testcase{
         $this->assertEquals(36, $a->lcm(12, 18));
         $this->assertEquals(52920, $a->lcm(3528, 3780));
     }
+
+    public function testToString(){
+        $a = new RationalNumber(0, 0);
+        $this->assertEquals("0", $a->toString());
+        
+        $b = new RationalNumber(-8, 7);
+        $this->assertEquals("-8/7", $b->toString());
+        $this->assertEquals("-(8/7)", $b->toString(true));
+
+        $c = new RationalNumber(8, 7);
+        $this->assertEquals("8/7", $c->toString());
+        $this->assertEquals("(8/7)", $c->toString(true));
+    }
 }

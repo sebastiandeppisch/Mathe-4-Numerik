@@ -102,4 +102,27 @@ class PolynomialSummandTest extends Testcase{
         $this->assertEquals(42, $a->getNumber());
         $this->assertEquals(49, $b->getNumber());
     }
+
+    public function testToString(){
+        $s = new PolynomialSummand(3, 2);
+        $this->assertEquals("3x^2", $s->toString());
+
+        $s = new PolynomialSummand(5, 0);
+        $this->assertEquals("5", $s->toString());
+
+        $s = new PolynomialSummand(-7, 3);
+        $this->assertEquals("-7x^3", $s->toString());
+
+        $s = new PolynomialSummand(-1, 3);
+        $this->assertEquals("-x^3", $s->toString());
+
+        $s = new PolynomialSummand(0, 12);
+        $this->assertEquals("0", $s->toString());
+
+        $s = new PolynomialSummand(1, 12);
+        $this->assertEquals("x^12", $s->toString());
+
+        $s = new PolynomialSummand(5, 1);
+        $this->assertEquals("5x", $s->toString());
+    }
 }

@@ -88,4 +88,17 @@ class RationalNumber{
 		}
 		return $result;
 	}
+
+	public function toString($brackets=false){
+		if($this->q === 1 || $this->p === 0){
+			return sprintf("%s", $this->p, $this->q);
+		}
+		if($brackets){
+			if($this->p < 0){
+				return sprintf("-(%s/%s)", -$this->p, $this->q);
+			}
+			return sprintf("(%s/%s)", $this->p, $this->q);
+		}
+		return sprintf("%s/%s", $this->p, $this->q);
+	}
 }

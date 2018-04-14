@@ -98,4 +98,10 @@ class PolynomialTest extends Testcase{
         $a->addString("4+10x^2+x^3");
         $this->assertEquals("4+10x<sup>2</sup>+x<sup>3</sup>", $a->toHTML());
     }
+
+    public function testtoStringRationalNumber(){
+        $a = new Polynomial();
+        $a->addString("4+10x^2+x^3")->divNumber(3);
+        $this->assertEquals("(4/3)+(10/3)x^2+(1/3)x^3", $a->toString());
+    }
 }

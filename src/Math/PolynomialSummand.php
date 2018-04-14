@@ -63,7 +63,32 @@ class PolynomialSummand{
         return $this;
     }
 
+    public function divNumber(int $number):PolynomialSummand{
+        $this->rationalNumber->mul(new RationalNumber(1, $number));
+        return $this;
+    }
+
     public function copy(){
         return new PolynomialSummand($this->getNumber(), $this->getExponentiation(), $this->getVariable());
+    }
+
+    public function toString(){
+        $rationalNumber = $this->getRationalNumber()->toString(true);
+        if($this->exponentiation !== 1){
+            $variableAndExponent=sprintf("%s^%s", $this->variable, $this->exponentiation);
+        }else{
+            $variableAndExponent=sprintf("%s", $this->variable);
+        }
+        
+        if($this->exponentiation == 0 || $rationalNumber == "0"){
+            return $rationalNumber;
+        }
+        if($rationalNumber == "1"){
+            return $variableAndExponent;
+        }
+        if($rationalNumber == "-1"){
+            return "-".$variableAndExponent;
+        }  
+        return $rationalNumber.$variableAndExponent;      
     }
 }
