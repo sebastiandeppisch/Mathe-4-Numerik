@@ -7,7 +7,8 @@ class MainController{
 
 	private static $menu=[
 		"PolynomExampleController" => "Polynom Formattierungs Beispiel",
-		"FunctionExampleController" => "Funktionsauswertung Beispiel"
+		"FunctionExampleController" => "Funktionsauswertung Beispiel",
+		"LagrangeController" => "Lagrange Beispiel"
 	];
 
 	public function __construct($controller){
