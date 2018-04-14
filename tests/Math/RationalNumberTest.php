@@ -31,8 +31,8 @@ class RationalNumberTest extends Testcase{
         $c = new RationalNumber(17, 21);
         $d = new RationalNumber(44, 35);
         $c->add($d);
-        $this->assertEquals(217, $c->getP());
-        $this->assertEquals(105, $c->getQ());
+        $this->assertEquals(31, $c->getP());
+        $this->assertEquals(15, $c->getQ());
     }
 
     public function testAddNegative(){
@@ -77,5 +77,22 @@ class RationalNumberTest extends Testcase{
         $c = new RationalNumber(8, 7);
         $this->assertEquals("8/7", $c->toString());
         $this->assertEquals("(8/7)", $c->toString(true));
+    }
+
+    public function testReduce(){
+        $a = new RationalNumber(0, 0);
+        $a->reduce();
+        $this->assertEquals(0, $a->getP());
+        $this->assertEquals(0, $a->getQ());
+
+        $b = new RationalNumber(1, 1);
+        $b->reduce();
+        $this->assertEquals(1, $b->getP());
+        $this->assertEquals(1, $b->getQ());
+
+        $c = new RationalNumber(10, 2);
+        $c->reduce();
+        $this->assertEquals(5, $c->getP());
+        $this->assertEquals(1, $c->getQ());
     }
 }

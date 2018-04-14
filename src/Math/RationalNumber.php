@@ -15,12 +15,14 @@ class RationalNumber{
 		$lcm = $this->lcm($this->getQ(), $rhs->getQ());
 		$this->setP($this->getP()*($lcm/$this->getQ()) + $rhs->getP()*($lcm / $rhs->getQ()));
 		$this->setQ($lcm);
+		$this->reduce();
 		return $this;
 	}
 
 	public function mul(RationalNumber $rhs):RationalNumber{
 		$this->setP($this->getP()*$rhs->getP());
 		$this->setQ($this->getQ()*$rhs->getQ());
+		$this->reduce();
 		return $this;
 	}
 
@@ -100,5 +102,13 @@ class RationalNumber{
 			return sprintf("(%s/%s)", $this->p, $this->q);
 		}
 		return sprintf("%s/%s", $this->p, $this->q);
+	}
+
+	public function reduce(){
+		if($this->p !== 0){
+			$gcd = $this->gcd(abs($this->p), abs($this->q));
+			$this->p=$this->p/$gcd;
+			$this->q=$this->q/$gcd;
+		}
 	}
 }
