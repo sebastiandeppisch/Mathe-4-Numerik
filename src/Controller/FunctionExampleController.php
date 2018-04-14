@@ -15,6 +15,9 @@ class FunctionExampleController extends Controller{
 	];
 
 	public function getOutputHTML(){
-		return $this->data["function"]->evaluate($this->data["number"]);
+		if(isset($this->data["function"])){
+			return $this->data["function"]->evaluate($this->data["number"]);
+		}
+		
 	}
 }

@@ -2,7 +2,8 @@
     "name": "sebastiandeppisch/mathe4numerik",
     "require": {
         "phpunit/phpunit": "^6.2",
-        "klein/klein": "^2.1"
+        "klein/klein": "^2.1",
+        "twig/twig": "^2.4"
     },
     "authors": [
         {

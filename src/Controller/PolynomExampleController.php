@@ -10,6 +10,9 @@ class PolynomExampleController extends Controller{
 	];
 
 	public function getOutputHTML(){
-		return $this->data["polynom"]->toHTML();
+		if(isset ($this->data["polynom"]) && $this->data["polynom"]!==NULL){
+			return $this->data["polynom"]->toHTML();
+		}
+		return "No Polynom given";
 	}
 }

@@ -14,6 +14,7 @@ class MainController{
 		if($controller !== NULL){
 			if(in_array($controller, array_keys(self::$menu))){
 				$test = new PolynomExampleController();
+				$this->currentActive=$controller;
 				$controller="\Controller\\".$controller;
 				$this->controller = new $controller;
 				$this->controller->setData($_GET);
@@ -37,10 +38,14 @@ class MainController{
 		$html = '<ul class="nav nav-sidebar">';
 
 		foreach(self::$menu as $controller => $label){
-			$html.='<li '.(($controller === $this->currentActive)?' class="active"':'').'><a href="?controller='.$controller.'">'.$label.'</a></li>';
+			$html.='<li '.(($controller === $this->currentActive)?' class="active"':'').'><a href="'.$controller.'">'.$label.'</a></li>';
 		}
 
 		$html.= '</ul>';
 		return $html;
+	}
+
+	public static function getControllerNames(){
+		return array_keys(self::$menu);
 	}
 }
