@@ -91,4 +91,8 @@ class PolynomialSummand{
         }  
         return $rationalNumber.$variableAndExponent;      
     }
+
+    public function signed(){
+        return $this->rationalNumber->getP() < 0;
+    }
 }

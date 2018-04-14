@@ -86,7 +86,7 @@ class Polynomial implements EvaluatableInt{
 		$result="";
 		foreach($this->summands as $key => &$summand){
 			if($key !== 0){
-				$result.=(($summand->getNumber()< 0 )?"":"+");
+				$result.=(($summand->signed())?"":"+");
 			}
 			$result.=$summand->toString();
 		}
