@@ -1,13 +1,18 @@
 <?php
 namespace Math;
-class PolynomialSummand implements EvaluatableInt{
+
+class PolynomialSummand{
     private $variable;
 
     private $exponentiation;
-    private $number;
+    private $rationalNumber;
 
     public function __construct($number, $exponentiation=0, $variable="x"){
-        $this->number =$number;
+        if($number instanceof RationalNumber){
+            $this->rationalNumber=$number;
+        }else{
+            $this->rationalNumber= new RationalNumber($number, 1);
+        }
         $this->exponentiation=$exponentiation;
         $this->variable=$variable;
     }
@@ -19,30 +24,41 @@ class PolynomialSummand implements EvaluatableInt{
         if($rhs->getExponentiation() !== $this->getExponentiation()){
             throw new Exception\PolynomialSummand\WrongExponentiation();
         }
-        $this->number+=$rhs->getNumber();
+        $this->rationalNumber->add($rhs->getRationalNumber());
     }
 
     public function getExponentiation(){
         return $this->exponentiation;
     }
 
+    public function getRationalNumber(){
+        return $this->rationalNumber;
+    }
+
     public function getNumber(){
-        return $this->number;
+        if($this->getRationalNumber()->getQ()=== 1){
+            return $this->rationalNumber->getP();
+        }
     }
 
     public function getVariable(){
         return $this->variable;
     }
 
-    public function evaluate(int $value):int {
-        return $this->number*pow($value, $this->exponentiation);
+    public function evaluate($value){
+        if($value instanceof RationalNumber){
+            $result = $this->rationalNumber->copy();
+            return $result->mul(new RationalNumber(pow($value->getP(), $this->exponentiation), pow($value->getP(), $this->exponentiation)));
+        }else{
+            return $this->rationalNumber->evaluate()*pow($value, $this->exponentiation);
+        }   
     }
 
     public function mul(PolynomialSummand $rhs):PolynomialSummand{
         if($rhs->getVariable() !== $this->getVariable()){
             throw new Exception\PolynomialSummand\WrongVariable();
         }
-        $this->number*=$rhs->getNumber();
+        $this->rationalNumber->mul($rhs->getRationalNumber());
         $this->exponentiation*=$rhs->getExponentiation();
         return $this;
     }
