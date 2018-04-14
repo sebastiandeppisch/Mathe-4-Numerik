@@ -69,7 +69,7 @@ class PolynomialSummand{
     }
 
     public function copy(){
-        return new PolynomialSummand($this->getNumber(), $this->getExponentiation(), $this->getVariable());
+        return new PolynomialSummand($this->getRationalNumber()->copy(), $this->getExponentiation(), $this->getVariable());
     }
 
     public function toString(){

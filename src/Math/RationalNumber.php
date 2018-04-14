@@ -111,4 +111,8 @@ class RationalNumber{
 			$this->q=$this->q/$gcd;
 		}
 	}
+
+	public function copy(){
+		return  new RationalNumber($this->p, $this->q);
+	}
 }
