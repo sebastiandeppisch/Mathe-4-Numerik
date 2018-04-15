@@ -18,19 +18,23 @@ class Lagrange{
 		return $n;
 	}
 
+	public function getY($x){
+		return $func->evaluate($x);
+	}
+
 	public function getLFactor($i, $j){
 		$part = new Polynomial();
 		$x_j=$this->getX($j);
 		$x_i=$this->getX($i);
-		$part->addSummand(new PolynomialSummand(1, 1));
-		$part->addSummand(new PolynomialSummand(-$x_j, 0));
+		$part->addSummand(new RPolynomialSummand(1, 1));
+		$part->addSummand(new RPolynomialSummand(-$x_j, 0));
 		$part->divNumber($x_i-$x_j);
 		return $part;
 	}
 
 	public function getL($i){
 		$p = new Polynomial();
-		$p->addSummand(new PolynomialSummand(1));
+		$p->addSummand(new RPolynomialSummand(1));
 		for($j=0;$j<=$this->degree; $j++){
 			if($j !== $i){
 				$p = $p->mul($this->getLFactor($i, $j));
@@ -45,5 +49,15 @@ class Lagrange{
 			$polynomials[]=$this->getL($i);
 		}
 		return $polynomials;
+	}
+
+	public function getResult(){
+		$result = new FPolynomial();
+		for($i=0;$i<=$this->degree;$i++){
+			$l = $this->getL($i);
+			$l->mul(new FPolynomialSummand($this->getY($this->getX($i))));
+			$result->add($l);
+		}
+		return $result;
 	}
 }
