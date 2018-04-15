@@ -81,7 +81,7 @@ class Polynomial implements EvaluatableInt{
 		return $this;
 	}
 
-	public function toString():string{ //TODO ugly code 
+	public function toString():string{
 		$this->sort();
 		$result="";
 		foreach($this->summands as $key => &$summand){
@@ -132,8 +132,18 @@ class Polynomial implements EvaluatableInt{
 	}
 
 	public function toHTML():string{
-		$data = $this->toString();
-		return preg_replace("/\^([0-9+])/", "<sup>$1</sup>", $data);
+		$this->sort();
+		$result='<div style="display: flex;align-items: center;">';
+		foreach($this->summands as $key => &$summand){
+			if($key !== 0){
+				$result.=(($summand->signed())?"":"+");
+			}
+			$result.=$summand->toHTML();
+		}
+		if($result == ""){
+			$result =  "0";
+		}
+		return $result."</div>";
 	}
 
 	public function divNumber(int $a):Polynomial{

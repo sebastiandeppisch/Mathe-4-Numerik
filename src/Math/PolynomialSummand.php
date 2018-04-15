@@ -96,4 +96,24 @@ class PolynomialSummand{
     public function signed(){
         return $this->rationalNumber->getP() < 0;
     }
+
+    public function toHTML(){
+        $rationalNumber = $this->getRationalNumber()->toHTML();
+        if($this->exponentiation !== 1){
+            $variableAndExponent=sprintf("%s<sup>%s</sup>", $this->variable, $this->exponentiation);
+        }else{
+            $variableAndExponent=sprintf("%s", $this->variable);
+        }
+        
+        if($this->exponentiation == 0 || $rationalNumber == "0"){
+            return $rationalNumber;
+        }
+        if($rationalNumber == "1"){
+            return $variableAndExponent;
+        }
+        if($rationalNumber == "-1"){
+            return "-".$variableAndExponent;
+        }  
+        return $rationalNumber.$variableAndExponent;
+    }
 }
