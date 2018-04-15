@@ -40,7 +40,6 @@ class LagrangeController extends Controller{
 	}
 
 	public function getOutputHTML(){
-		var_dump($this->lagrange);
 		$this->getLagrangePolynomials();
 		if(isset($this->data["function"]) && $this->data["function"] !== NULL){
 			$html="";
