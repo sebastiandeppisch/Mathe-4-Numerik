@@ -5,22 +5,26 @@ class LagrangeController extends Controller{
 		[
 			"type"=>"function",
 			"name"=>"function",
-			"description"=>"Zu interpolierende Funktion"
+			"description"=>"Zu interpolierende Funktion",
+			"default" => "sin(x)"
 		],
 		[
 			"type"=>"int",
 			"name"=>"a",
-			"description"=>"Von"
+			"description"=>"Von",
+			"default" => "0"
 		],
 		[
 			"type"=>"int",
 			"name"=>"b",
-			"description"=>"Bis"
+			"description"=>"Bis",
+			"default" => "3"
 		],
 		[
 			"type"=>"int",
 			"name"=>"degree",
-			"description"=>"Grad"
+			"description"=>"Grad",
+			"default" => "3"
 		]
 	];
 	
