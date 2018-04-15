@@ -97,8 +97,8 @@ class PolynomialSummand{
         return $this->rationalNumber->getP() < 0;
     }
 
-    public function toHTML(){
-        $rationalNumber = $this->getRationalNumber()->toHTML();
+    public function toInnerHTML($signed=true){
+        $rationalNumber = $this->getRationalNumber()->toHTML($signed);
         if($this->exponentiation !== 1){
             $variableAndExponent=sprintf("%s<sup>%s</sup>", $this->variable, $this->exponentiation);
         }else{
@@ -115,5 +115,9 @@ class PolynomialSummand{
             return "-".$variableAndExponent;
         }  
         return $rationalNumber.$variableAndExponent;
+    }
+
+    public function toHTML($signed=true){
+        return '<div class="polynomialsummand">'.$this->toInnerHTML($signed).'</div>';
     }
 }

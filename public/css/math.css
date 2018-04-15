@@ -1,0 +1,27 @@
+.polynomial{
+	display: flex; 
+}
+
+.polynomialsummand{
+	padding: 3px;
+	align-items: center;
+	display: flex; 
+}
+
+.rationalnumber{
+	display: inline-block;
+}
+
+.polnomialsummand-outer{
+	display:flex;
+}
+
+.rationalnumber-fractionline{
+	height:1px;
+	background-color:black;
+}
+
+.polnomialsummand-sign{
+	align-items: center;
+	display: flex; 
+}

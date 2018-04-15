@@ -133,12 +133,14 @@ class Polynomial implements EvaluatableInt{
 
 	public function toHTML():string{
 		$this->sort();
-		$result='<div style="display: flex;align-items: center;">';
+		$result='<div class="polynomial">';
 		foreach($this->summands as $key => &$summand){
+			$result.='<div class="polnomialsummand-outer">';
 			if($key !== 0){
-				$result.=(($summand->signed())?"":"+");
+				$result.='<div class="polnomialsummand-sign">'.(($summand->signed())?"-":"+").'</div>';
 			}
-			$result.=$summand->toHTML();
+			$result.=$summand->toHTML(false);
+			$result.='</div>';
 		}
 		if($result == ""){
 			$result =  "0";

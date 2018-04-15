@@ -49,8 +49,12 @@ class RationalNumber{
 		$this->q=$q;
 	}
 
-	public function toHTML(){
-		return '<div style="display: inline-block;"><div class="text-center">'.$this->p.'</div><div style="height:1px;background-color:black;"></div><div class="text-center">'.$this->q.'</div></div>';
+	public function toHTML($signed = true){
+		$p =($signed)?$this->p:abs($this->p);
+		if($this->q == 1){
+			return '<div class="rationalnumber">'.$p.'</div>';
+		}
+		return '<div class="rationalnumber"><div class="text-center">'.$p.'</div><div class="rationalnumber-fractionline"></div><div class="text-center">'.$this->q.'</div></div>';
 	}
 
 	public function evaluate():float{
