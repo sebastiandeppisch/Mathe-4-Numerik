@@ -25,7 +25,9 @@ class LagrangeController extends Controller{
 	];
 	
 	private $lagrange;
-	public function __constructor(){
+
+	public function setData($parameters){
+		parent::setData($parameters);
 		$this->lagrange = new \Math\Lagrange($this->data["function"], $this->data["degree"], $this->data["a"], $this->data["b"]);
 	}
 
@@ -34,15 +36,19 @@ class LagrangeController extends Controller{
 	}
 
 	public function getLagrangePolynomials(){
-		return $this->lagrange->getLagrangePolynomials();
+		return $this->lagrange->getPolynomials();
 	}
 
 	public function getOutputHTML(){
-		/*$this->getLagrangePolynomials();
+		var_dump($this->lagrange);
+		$this->getLagrangePolynomials();
 		if(isset($this->data["function"]) && $this->data["function"] !== NULL){
-			return $this->data["function"]->evaluate($this->data["a"]);
-		}*/
-		$test = new \Math\RationalNumber(14234234, 56546);
-		return $test->toHTML();
+			$html="";
+			foreach($this->getLagrangePolynomials() as $p){
+				$html.="<div>".$p->toHTML()."</div>";
+			}
+			return $html;
+		}
+		
 	}
 }
