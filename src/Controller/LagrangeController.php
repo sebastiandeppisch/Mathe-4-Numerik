@@ -47,11 +47,16 @@ class LagrangeController extends Controller{
 		$this->getLagrangePolynomials();
 		if(isset($this->data["function"]) && $this->data["function"] !== NULL){
 			$html="";
-			foreach($this->getLagrangePolynomials() as $p){
-				$html.="<div>".$p->toHTML()."</div>";
+			$i=0;
+			$pols = $this->getLagrangePolynomials();
+			$n = count($pols);
+			foreach($pols as $p){
+				$html.="<div class='result-outer'><div class='result-lhs'>L<sub>$i,$n</sub>=</div>".$p->toHTML()."</div>";
+				$i++;
 			}
-			$html.="<br><br><br>";
-			$html.=$this->getResult()->toHTML();
+			$html.="<hr>";
+			$html.="<div class='result-outer'><div class='result-lhs'>p(x<sub>i</sub>)=</div>".$this->getResult()->toHTML()."</div>";
+			$html.="<div class='result-outer'><div class='result-lhs'>p(x<sub>i</sub>)=</div>".$this->getResult()->toString()."</div>";
 			return $html;
 		}
 		

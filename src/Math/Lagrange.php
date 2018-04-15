@@ -19,7 +19,7 @@ class Lagrange{
 	}
 
 	public function getY($x){
-		return $func->evaluate($x);
+		return $this->func->evaluate($x);
 	}
 
 	public function getLFactor($i, $j){
@@ -52,10 +52,13 @@ class Lagrange{
 	}
 
 	public function getResult(){
-		$result = new FPolynomial();
+		$result = new Polynomial();
 		for($i=0;$i<=$this->degree;$i++){
 			$l = $this->getL($i);
-			$l->mul(new FPolynomialSummand($this->getY($this->getX($i))));
+			$l = $l->toFloat();
+			$p = new Polynomial();
+			$p->addSummand(new FPolynomialSummand($this->getY($this->getX($i))));
+			$l = $l->mul($p);
 			$result->add($l);
 		}
 		return $result;

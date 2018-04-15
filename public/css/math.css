@@ -25,3 +25,12 @@
 	align-items: center;
 	display: flex; 
 }
+
+.result-outer{
+	display: flex;
+}
+
+.result-lhs{
+	align-items: center;
+	display: flex;
+}
