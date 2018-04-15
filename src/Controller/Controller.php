@@ -13,19 +13,21 @@ abstract class Controller{
 		foreach(static::$inputFields as $field){
 			if(isset($parameters[$field["name"]])){
 				$parameter = $parameters[$field["name"]];
-				$data = $parameter;
-				switch($field["type"]){
-					case "polynom":
-						$p = new \Math\Polynomial();
-						$p->addString($parameter);
-						$data=$p;
-					break;
-					case "function":
-						$data = new \Math\MFunction($parameter);
-					break;
-				}
-				$this->data[$field["name"]]=$data;
+			}else{
+				$parameter = "";
 			}
+			$data = $parameter;
+			switch($field["type"]){
+				case "polynom":
+					$p = new \Math\Polynomial();
+					$p->addString($parameter);
+					$data=$p;
+				break;
+				case "function":
+					$data = new \Math\MFunction($parameter);
+				break;
+			}
+			$this->data[$field["name"]]=$data;
 		}
 	}
 
