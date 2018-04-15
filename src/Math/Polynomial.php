@@ -11,7 +11,7 @@ class Polynomial implements EvaluatableInt{
 
 	//internal 
 
-	public function addSummand(PolynomialSummand $newSummand):Polynomial{
+	public function addSummand(RPolynomialSummand $newSummand):Polynomial{
 		foreach($this->summands as &$summand){
 			if($summand->getExponentiation() === $newSummand->getExponentiation()){
 				$summand->add($newSummand);
@@ -76,7 +76,7 @@ class Polynomial implements EvaluatableInt{
 				}
 			}
 			$number = (int) $number;
-			$this->addSummand(new \Math\PolynomialSummand($number, $exponentiation, $this->variable));
+			$this->addSummand(new \Math\RPolynomialSummand($number, $exponentiation, $this->variable));
 		}
 		return $this;
 	}

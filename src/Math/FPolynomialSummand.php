@@ -1,7 +1,7 @@
 <?php
 namespace Math;
 
-class PolynomialSummand{
+class FPolynomialSummand{
     private $variable;
 
     private $exponentiation;
@@ -17,7 +17,7 @@ class PolynomialSummand{
         $this->variable=$variable;
     }
 
-    public function add(PolynomialSummand $rhs){
+    public function add(FPolynomialSummand $rhs){
         if($rhs->getVariable() !== $this->getVariable()){
             throw new Exception\PolynomialSummand\WrongVariable();
         }
@@ -26,7 +26,7 @@ class PolynomialSummand{
         }
         $this->rationalNumber->add($rhs->getRationalNumber());
     }
-
+    
     public function getExponentiation(){
         return $this->exponentiation;
     }
@@ -54,7 +54,7 @@ class PolynomialSummand{
         }   
     }
 
-    public function mul(PolynomialSummand $rhs):PolynomialSummand{
+    public function mul(FPolynomialSummand $rhs):FPolynomialSummand{
         if($rhs->getVariable() !== $this->getVariable()){
             throw new Exception\PolynomialSummand\WrongVariable();
         }
@@ -64,13 +64,13 @@ class PolynomialSummand{
         return $a;
     }
 
-    public function divNumber(int $number):PolynomialSummand{
+    public function divNumber(int $number):FPolynomialSummand{
         $this->rationalNumber->mul(new RationalNumber(1, $number));
         return $this;
     }
 
     public function copy(){
-        return new PolynomialSummand($this->getRationalNumber()->copy(), $this->getExponentiation(), $this->getVariable());
+        return new FPolynomialSummand($this->getRationalNumber()->copy(), $this->getExponentiation(), $this->getVariable());
     }
 
     public function toString(){
