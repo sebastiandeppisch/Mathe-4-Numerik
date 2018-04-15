@@ -16,7 +16,7 @@
 
 	<!-- Custom styles for this template -->
 	<link href="css/dashboard.css" rel="stylesheet">
-
+	<link href="css/math.css" rel="stylesheet">
 </head>
 
 <body>
@@ -40,6 +40,7 @@
 				{{ menu |raw }}
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				{% if input != null %}
 				<div class="panel panel-success">
 					<div class="panel-heading">
 						Eingeparameter
@@ -48,6 +49,8 @@
 						{{ input|raw }}
 					</div>
 				</div>
+				{% endif %}
+				{% if output != null %}
 				<div class="panel panel-warning">
 					<div class="panel-heading">
 						Ausgabe
@@ -56,6 +59,7 @@
 						{{ output |raw}}
 					</div>
 				</div>
+				{% endif %}
 			</div>
 		</div>
 	</div>
