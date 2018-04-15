@@ -14,7 +14,7 @@ class RPolynomialSummandTest extends Testcase{
         $b = new RPolynomialSummand(42);
 
         $a->add($b);
-        $this->assertEquals(55, $a->getNumber());
+        $this->assertEquals(55, $a->getNumber()->evaluate());
         $this->assertEquals(0, $a->getExponentiation());
     }
 
@@ -23,7 +23,7 @@ class RPolynomialSummandTest extends Testcase{
         $b = new RPolynomialSummand(0);
 
         $a->add($b);
-        $this->assertEquals(0, $a->getNumber());
+        $this->assertEquals(0, $a->getNumber()->evaluate());
         $this->assertEquals(0, $a->getExponentiation());
     }
 
@@ -32,7 +32,7 @@ class RPolynomialSummandTest extends Testcase{
         $b = new RPolynomialSummand(-42);
 
         $a->add($b);
-        $this->assertEquals(-32, $a->getNumber());
+        $this->assertEquals(-32, $a->getNumber()->evaluate());
         $this->assertEquals(0, $a->getExponentiation());
     }
 
@@ -75,7 +75,7 @@ class RPolynomialSummandTest extends Testcase{
         $b = new RPolynomialSummand(2);
 
         $a=$a->mul($b);
-        $this->assertEquals(14, $a->getNumber());
+        $this->assertEquals(14, $a->getNumber()->evaluate());
         $this->assertEquals(0, $a->getExponentiation());
     }
 
@@ -84,7 +84,7 @@ class RPolynomialSummandTest extends Testcase{
         $b = new RPolynomialSummand(2, 8);
 
         $a=$a->mul($b);
-        $this->assertEquals(14, $a->getNumber());
+        $this->assertEquals(14, $a->getNumber()->evaluate());
         $this->assertEquals(5, $a->getExponentiation());
     }
 
@@ -92,15 +92,15 @@ class RPolynomialSummandTest extends Testcase{
         $a = new RPolynomialSummand(42);
         $b = $a;
         $b->add(new RPolynomialSummand(7));
-        $this->assertEquals(49, $a->getNumber());
+        $this->assertEquals(49, $a->getNumber()->evaluate());
     }
 
     public function testCopiedCanNotBeChanged(){
         $a = new RPolynomialSummand(42);
         $b = $a->copy();
         $b->add(new RPolynomialSummand(7));
-        $this->assertEquals(42, $a->getNumber());
-        $this->assertEquals(49, $b->getNumber());
+        $this->assertEquals(42, $a->getNumber()->evaluate());
+        $this->assertEquals(49, $b->getNumber()->evaluate());
     }
 
     public function testToString(){

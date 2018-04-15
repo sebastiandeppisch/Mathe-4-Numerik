@@ -2,11 +2,6 @@
 namespace Math;
 
 class FPolynomialSummand{
-    private $variable;
-
-    private $exponentiation;
-    private $rationalNumber;
-
     public function __construct($number, $exponentiation=0, $variable="x"){
         if($number instanceof RationalNumber){
             $this->rationalNumber=$number;

@@ -1,45 +1,21 @@
 <?php
 namespace Math;
 
-class RPolynomialSummand{
-    private $variable;
-
-    private $exponentiation;
-    private $rationalNumber;
-
+class RPolynomialSummand extends PolynomialSummand{
     public function __construct($number, $exponentiation=0, $variable="x"){
         if($number instanceof RationalNumber){
-            $this->rationalNumber=$number;
+            $this->number=$number;
         }else{
-            $this->rationalNumber= new RationalNumber($number, 1);
+            $this->number= new RationalNumber($number, 1);
         }
         $this->exponentiation=$exponentiation;
         $this->variable=$variable;
     }
 
-    public function add(RPolynomialSummand $rhs){
-        if($rhs->getVariable() !== $this->getVariable()){
-            throw new Exception\PolynomialSummand\WrongVariable();
-        }
-        if($rhs->getExponentiation() !== $this->getExponentiation()){
-            throw new Exception\PolynomialSummand\WrongExponentiation();
-        }
-        $this->rationalNumber->add($rhs->getRationalNumber());
-    }
-
-    public function getExponentiation(){
-        return $this->exponentiation;
-    }
-
     public function getRationalNumber(){
-        return $this->rationalNumber;
+        return $this->number;
     }
 
-    public function getNumber(){
-        if($this->getRationalNumber()->getQ()=== 1){
-            return $this->rationalNumber->getP();
-        }
-    }
 
     public function getVariable(){
         return $this->variable;
@@ -47,25 +23,16 @@ class RPolynomialSummand{
 
     public function evaluate($value){
         if($value instanceof RationalNumber){
-            $result = $this->rationalNumber->copy();
+            $result = $this->number->copy();
             return $result->mul(new RationalNumber(pow($value->getP(), $this->exponentiation), pow($value->getP(), $this->exponentiation)));
         }else{
-            return $this->rationalNumber->evaluate()*pow($value, $this->exponentiation);
+            return $this->number->evaluate()*pow($value, $this->exponentiation);
         }   
     }
 
-    public function mul(RPolynomialSummand $rhs):RPolynomialSummand{
-        if($rhs->getVariable() !== $this->getVariable()){
-            throw new Exception\PolynomialSummand\WrongVariable();
-        }
-        $a=$this->copy();
-        $a->rationalNumber->mul($rhs->getRationalNumber());
-        $a->exponentiation+=$rhs->getExponentiation();
-        return $a;
-    }
 
-    public function divNumber(int $number):RPolynomialSummand{
-        $this->rationalNumber->mul(new RationalNumber(1, $number));
+    public function divNumber($number){
+        $this->number->mul(new RationalNumber(1, $number));
         return $this;
     }
 
@@ -94,30 +61,7 @@ class RPolynomialSummand{
     }
 
     public function signed(){
-        return $this->rationalNumber->getP() < 0;
+        return $this->number->getP() < 0;
     }
 
-    public function toInnerHTML($signed=true){
-        $rationalNumber = $this->getRationalNumber()->toHTML($signed);
-        if($this->exponentiation !== 1){
-            $variableAndExponent=sprintf("%s<sup>%s</sup>", $this->variable, $this->exponentiation);
-        }else{
-            $variableAndExponent=sprintf("%s", $this->variable);
-        }
-        
-        if($this->exponentiation == 0 || $rationalNumber == "0"){
-            return $rationalNumber;
-        }
-        if($rationalNumber == "1"){
-            return $variableAndExponent;
-        }
-        if($rationalNumber == "-1"){
-            return "-".$variableAndExponent;
-        }  
-        return $rationalNumber.$variableAndExponent;
-    }
-
-    public function toHTML($signed=true){
-        return '<div class="polynomialsummand">'.$this->toInnerHTML($signed).'</div>';
-    }
 }
