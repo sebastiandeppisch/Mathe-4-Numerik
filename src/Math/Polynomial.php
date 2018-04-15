@@ -100,9 +100,8 @@ class Polynomial implements EvaluatableInt{
 
 	public function mul(Polynomial $rhs):Polynomial{
 		$p = new Polynomial($this->variable);
-		foreach($this->summands as $a){
+		foreach($this->getSummands() as $a){
 			foreach($rhs->getSummands() as $b){
-				$a= $a->copy();
 				$p->addSummand($a->mul($b));
 			}
 		}
@@ -142,5 +141,13 @@ class Polynomial implements EvaluatableInt{
 			$summand->divNumber($a);
 		}
 		return $this;
+	}
+
+	public function copy(){
+		$p =  new Polynomial($this->variable);
+		foreach($this->summands as $summand){
+			$p->addSummand($summand->copy());
+		}
+		return $p;
 	}
 }

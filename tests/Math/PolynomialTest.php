@@ -112,4 +112,24 @@ class PolynomialTest extends Testcase{
         $c->addString("4-10x^2+x^3")->divNumber(-2);
         $this->assertEquals("-2+5x^2-(1/2)x^3", $c->toString());
     }
+
+    public function testMulRationalNumbers(){
+        $a = new Polynomial();
+        $b = new Polynomial();
+
+        $a->addString("10x^2")->divNumber(3);
+        $b->addString("20x^2");
+        $c = $a->mul($b);
+        $this->assertEquals("(200/3)x^4", $c->toString());
+        $this->assertEquals("(10/3)x^2", $a->toString());
+        $this->assertEquals("20x^2", $b->toString());
+
+        $d = new Polynomial();
+        $d->addString("10x^2+5x");
+        
+        $e = new Polynomial();
+        $e->addString("13x^2-10x+7x^5");
+        $f = $d->mul($e);
+        $this->assertEquals("-50x^2-35x^3+130x^4+35x^6+70x^7", $f->toString());
+    }
 }

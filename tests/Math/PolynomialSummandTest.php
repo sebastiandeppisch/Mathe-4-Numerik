@@ -74,7 +74,7 @@ class PolynomialSummandTest extends Testcase{
         $a = new PolynomialSummand(7);
         $b = new PolynomialSummand(2);
 
-        $a->mul($b);
+        $a=$a->mul($b);
         $this->assertEquals(14, $a->getNumber());
         $this->assertEquals(0, $a->getExponentiation());
     }
@@ -83,9 +83,9 @@ class PolynomialSummandTest extends Testcase{
         $a = new PolynomialSummand(7, -3);
         $b = new PolynomialSummand(2, 8);
 
-        $a->mul($b);
+        $a=$a->mul($b);
         $this->assertEquals(14, $a->getNumber());
-        $this->assertEquals(-24, $a->getExponentiation());
+        $this->assertEquals(5, $a->getExponentiation());
     }
 
     public function testUnCopiedCanBeChanged(){

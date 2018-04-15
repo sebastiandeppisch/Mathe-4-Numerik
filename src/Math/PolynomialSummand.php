@@ -58,9 +58,10 @@ class PolynomialSummand{
         if($rhs->getVariable() !== $this->getVariable()){
             throw new Exception\PolynomialSummand\WrongVariable();
         }
-        $this->rationalNumber->mul($rhs->getRationalNumber());
-        $this->exponentiation*=$rhs->getExponentiation();
-        return $this;
+        $a=$this->copy();
+        $a->rationalNumber->mul($rhs->getRationalNumber());
+        $a->exponentiation+=$rhs->getExponentiation();
+        return $a;
     }
 
     public function divNumber(int $number):PolynomialSummand{
