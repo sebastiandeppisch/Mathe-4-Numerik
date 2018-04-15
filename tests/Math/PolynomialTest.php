@@ -96,7 +96,7 @@ class PolynomialTest extends Testcase{
     public function testHTML(){
         $a = new Polynomial();
         $a->addString("4+10x^2+x^3");
-        $this->assertEquals("4+10x<sup>2</sup>+x<sup>3</sup>", $a->toHTML());
+        $this->assertEquals('<div class="polynomial"><div class="polnomialsummand-outer"><div class="polynomialsummand"><div class="rationalnumber">4</div></div></div><div class="polnomialsummand-outer"><div class="polnomialsummand-sign">+</div><div class="polynomialsummand"><div class="rationalnumber">10</div>x<sup>2</sup></div></div><div class="polnomialsummand-outer"><div class="polnomialsummand-sign">+</div><div class="polynomialsummand"><div class="rationalnumber">1</div>x<sup>3</sup></div></div></div>', $a->toHTML());
     }
 
     public function testtoStringRationalNumber(){
