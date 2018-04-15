@@ -11,7 +11,7 @@ class RationalNumber{
 		$this->setQ($q);
 	}
 
-	public function add(RationalNumber $rhs):RationalNumber{
+	public function add($rhs){
 		$lcm = $this->lcm($this->getQ(), $rhs->getQ());
 		$this->setP($this->getP()*($lcm/$this->getQ()) + $rhs->getP()*($lcm / $rhs->getQ()));
 		$this->setQ($lcm);

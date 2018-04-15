@@ -21,7 +21,7 @@ abstract class PolynomialSummand{
     }
 
     public function getExponentiation(){
-        return $this->exponentiation;
+        return (int) $this->exponentiation;
     }
 
     public function getNumber(){
@@ -39,14 +39,16 @@ abstract class PolynomialSummand{
             throw new Exception\PolynomialSummand\WrongVariable();
         }
         $a=$this->copy();
-        $a->number->mul($rhs->getRationalNumber());
+        $a->number->mul($rhs->getNumber());
         $a->exponentiation+=$rhs->getExponentiation();
         return $a;
     }
 
     abstract public function divNumber($number);
 
-    abstract public function copy();
+    public function copy(){
+        return new static($this->getNumber()->copy(), $this->getExponentiation(), $this->getVariable());
+    }
 
     abstract public function toString();
 

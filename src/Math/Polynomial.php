@@ -162,4 +162,11 @@ class Polynomial implements EvaluatableInt{
 		}
 		return $p;
 	}
+
+	public function toFloat():Polynomial{
+		foreach($this->summands as &$summand){
+			$summand = $summand->toFloat();
+		}
+		return $this;
+	}
 }

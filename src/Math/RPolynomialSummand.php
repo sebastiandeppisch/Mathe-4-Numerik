@@ -64,4 +64,8 @@ class RPolynomialSummand extends PolynomialSummand{
         return $this->number->getP() < 0;
     }
 
+    public function toFloat(){
+        return new FPolynomialSummand($this->getNumber()->evaluate(), $this->getExponentiation(), $this->getVariable());
+    }
+
 }
