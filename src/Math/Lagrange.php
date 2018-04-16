@@ -1,24 +1,26 @@
 <?php
 namespace Math;
-class Lagrange{
-	private $func;
+abstract class Lagrange{
+	protected $func;
 
-	private $degree;
+	protected $degree;
 
-	private $a;
+	protected $a;
 
-	private $b;
+	protected $b;
 	public function __construct(MFunction $func, $degree, $a, $b){
 		$this->func = $func;
 		$this->degree=$degree;
 		$this->a=$a;
 		$this->b=$b;
 	}
-	public function getX($n){
-		return $n;
-	}
+
+	abstract public function getX($n);
 
 	public function getY($x){
+		if($x instanceof RationalNumber){
+			$x = $x->evaluate();
+		}
 		return $this->func->evaluate($x);
 	}
 
@@ -26,9 +28,10 @@ class Lagrange{
 		$part = new Polynomial();
 		$x_j=$this->getX($j);
 		$x_i=$this->getX($i);
+		$x_jMinus=$x_j->mul(new RationalNumber(-1, 1));
 		$part->addSummand(new RPolynomialSummand(1, 1));
-		$part->addSummand(new RPolynomialSummand(-$x_j, 0));
-		$part->divNumber($x_i-$x_j);
+		$part->addSummand(new RPolynomialSummand($x_jMinus, 0));
+		$part = $part->divRational($x_i->add($x_jMinus));
 		return $part;
 	}
 
