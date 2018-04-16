@@ -10,6 +10,11 @@
 
 .rationalnumber{
 	display: inline-block;
+	color:green;
+}
+
+.floatnumber{
+	color:red;
 }
 
 .polnomialsummand-outer{
