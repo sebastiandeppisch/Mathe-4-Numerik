@@ -30,6 +30,7 @@
 				"menu" => $controller->getMenuHTML(),
 				"input" => $controller->getInputHTML(),
 				"output" => $controller->getOutputHTML(),
+				"chart" => $controller->getChartHTML()
 			]);
 		});
 	}
