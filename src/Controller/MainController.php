@@ -49,4 +49,10 @@ class MainController{
 	public static function getControllerNames(){
 		return array_keys(self::$menu);
 	}
+
+	public function getChartHTML(){
+		if($this->controller !== NULL){
+			return $this->controller->getChart()->getHTML();
+		}
+	}
 }
