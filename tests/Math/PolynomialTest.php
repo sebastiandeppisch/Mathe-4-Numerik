@@ -132,4 +132,10 @@ class PolynomialTest extends Testcase{
         $f = $d->mul($e);
         $this->assertEquals("-50x^2-35x^3+130x^4+35x^6+70x^7", $f->toString());
     }
+
+    public function testNullsareDeleted(){
+        $a = new Polynomial();
+        $a->addString("x^2+x^3")->addString("-x^2-x^3");
+        $this->assertEquals("0", $a->toString());
+    }
 }
