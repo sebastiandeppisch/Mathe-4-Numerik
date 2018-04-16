@@ -3,7 +3,8 @@
     "require": {
         "phpunit/phpunit": "^6.2",
         "klein/klein": "^2.1",
-        "twig/twig": "^2.4"
+        "twig/twig": "^2.4",
+        "khill/lavacharts" : "3.0.*"
     },
     "authors": [
         {
