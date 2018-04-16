@@ -14,7 +14,8 @@ class FPolynomialSummand extends PolynomialSummand{
 
     
     public function evaluate($value){
-        return $this->getNumber()->evaluate()*pow($value, $this->exponentiation);
+        $result = $this->getNumber()->copy();
+        return $result->evaluate()*pow($value, $this->exponentiation);
     }
 
     public function divNumber($number):FPolynomialSummand{
@@ -69,5 +70,9 @@ class FPolynomialSummand extends PolynomialSummand{
 
     public function toHTML($signed=true){
         return '<div class="polynomialsummand">'.$this->toInnerHTML($signed).'</div>';
+    }
+
+    public function toFloat(){
+        return $this->copy();
     }
 }
