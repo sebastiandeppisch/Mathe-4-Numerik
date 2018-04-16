@@ -8,7 +8,8 @@ class MainController{
 	private static $menu=[
 		"PolynomExampleController" => "Polynom Formattierungs Beispiel",
 		"FunctionExampleController" => "Funktionsauswertung Beispiel",
-		"LagrangeController" => "Lagrange Beispiel"
+		"LagrangeController" => "Lagrange Interpolation",
+		"NewtonController" => "Newton Interpolation"
 	];
 
 	public function __construct($controller){

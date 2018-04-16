@@ -14,6 +14,7 @@ abstract class Controller{
 			if(isset($parameters[$field["name"]])){
 				$parameter = $parameters[$field["name"]];
 			}else{
+				var_dump($parameters);
 				$parameter = $field["default"];
 				$this->parameters[$field["name"]]=$parameter;
 			}
@@ -28,9 +29,9 @@ abstract class Controller{
 					$data = new \Math\MFunction($parameter);
 				break;
 				case "array-rational":
-					$parameters = explode(",", $parameter);
+					$ps = explode(",", $parameter);
 					$data=[];
-					foreach($parameters as $rational){
+					foreach($ps as $rational){
 						$data[] = \Math\RationalNumber::fromString($rational);
 					}
 				break;
