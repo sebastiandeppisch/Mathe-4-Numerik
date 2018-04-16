@@ -17,6 +17,9 @@
 	<!-- Custom styles for this template -->
 	<link href="css/dashboard.css" rel="stylesheet">
 	<link href="css/math.css" rel="stylesheet">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
 </head>
 
 <body>
@@ -60,14 +63,18 @@
 					</div>
 				</div>
 				{% endif %}
+				{% if output != null %}
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						Visualisierung
+					</div>
+					<div class="panel-body">
+						{{ chart |raw}}
+					</div>
+				</div>
+				{% endif %}
 			</div>
 		</div>
-	</div>
-
-	<!-- Bootstrap core JavaScript
-	================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	</div>	
 </body>
 </html>
