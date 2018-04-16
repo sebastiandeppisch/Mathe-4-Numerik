@@ -3,6 +3,7 @@ use PHPUnit\FrameWork\TestCase;
 
 use Math\RPolynomialSummand;
 use Math\FPolynomialSummand;
+use Math\Polynomial;
 
 class FPolynomialSummandTest extends Testcase{
 
@@ -129,5 +130,25 @@ class FPolynomialSummandTest extends Testcase{
         $p->add($p2);
         $this->assertEquals("13.5x^2+3.0x^3", $p->toString());
        
+    }
+
+    public function testMulNumbers(){
+        $a = new Polynomial();
+        $b = new Polynomial();
+
+        $a->addString("10x^2")->toFloat()->divNumber(3);
+        $b->addString("20x^2")->toFloat();
+        $c = $a->mul($b)->toFloat();
+        $this->assertEquals("66.666666666667x^4", $c->toString());
+        $this->assertEquals("3.3333333333333x^2", $a->toString());
+        $this->assertEquals("20.0x^2", $b->toString());
+
+        $d = new Polynomial();
+        $d->addString("10x^2+5x")->toFloat();
+        
+        $e = new Polynomial();
+        $e->addString("13x^2-10x+7x^5")->toFloat();
+        $f = $d->mul($e)->toFloat();
+        $this->assertEquals("-50.0x^2-35.0x^3+130.0x^4+35.0x^6+70.0x^7", $f->toString());
     }
 }

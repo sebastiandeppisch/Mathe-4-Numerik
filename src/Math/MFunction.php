@@ -3,6 +3,8 @@ namespace Math;
 class MFunction implements EvaluatableFloat{
 	private $func;
 	public function __construct(string $func){
+		$func = preg_replace("/([0-9]+)(x)/", "$1*$2", $func);
+		$func = preg_replace("/(x)\^([0-9]+)/", "pow($1,$2)", $func);
 		$this->func=$func;
 	}
 
@@ -24,9 +26,13 @@ class MFunction implements EvaluatableFloat{
 	}
 
 	public function evaluate(float $value):float{
-		$func = preg_replace("/([0-9]+)(x)/", "$1*$2", $this->func);
+		$func = $this->func;
 		$func = str_replace("x", $value, $func);
-		$func = preg_replace("/([0-9]+)\^([0-9]+)/", "pow($1,$2)", $func);
+		//$func = preg_replace("/(\-?[0-9]+(?:\.[0-9]+)?)\^([0-9]+)/", "pow($1,$2)", $func);
 		return $this->executeEquation($func);
+	}
+
+	public function toString(){
+		return $func;
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 namespace Math;
 
-use Exception\DivisionNullException;
+use Math\Exception\DivisionNullException;
 class RationalNumber{
 	private $p;
 
@@ -35,7 +35,7 @@ class RationalNumber{
 	}
 
 	public function setP($p){
-		$this->p=$p;
+		$this->p=(int)$p;
 	}
 
 	public function setQ($q){
@@ -46,7 +46,7 @@ class RationalNumber{
 			$q = $q*-1;
 			$this->p=$this->p*-1;
 		}
-		$this->q=$q;
+		$this->q=(int)$q;
 	}
 
 	public function toHTML($signed = true){
@@ -118,5 +118,16 @@ class RationalNumber{
 
 	public function copy(){
 		return  new RationalNumber($this->p, $this->q);
+	}
+
+	static public function fromString($number){
+		$number = explode("/", $number);
+		$p = (int)$number[0];
+		if(isset($number[1])){
+			$q =(int) $number[1];
+		}else{
+			$q=1;
+		}
+		return new RationalNumber($p, $q);
 	}
 }

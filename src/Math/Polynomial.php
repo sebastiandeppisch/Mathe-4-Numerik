@@ -1,6 +1,6 @@
 <?php
 namespace Math;
-class Polynomial implements EvaluatableInt{
+class Polynomial{
 	private $variable;
 
 	private $summands=array();
@@ -15,11 +15,21 @@ class Polynomial implements EvaluatableInt{
 		foreach($this->summands as &$summand){
 			if($summand->getExponentiation() === $newSummand->getExponentiation()){
 				$summand->add($newSummand);
+				$this->deleteEmpty();
 				return $this;
 			}
 		}
 		$this->summands[]=$newSummand;
+		$this->deleteEmpty();
 		return $this;
+	}
+
+	public function deleteEmpty(){
+		foreach($this->summands as $key => $summand){
+			if($summand->getNumber()->evaluate() == 0){
+				unset($this->summands[$key]);
+			}
+		}
 	}
 
 	public function sort(){
@@ -78,6 +88,7 @@ class Polynomial implements EvaluatableInt{
 			$number = (int) $number;
 			$this->addSummand(new \Math\RPolynomialSummand($number, $exponentiation, $this->variable));
 		}
+		$this->deleteEmpty();
 		return $this;
 	}
 
@@ -123,7 +134,7 @@ class Polynomial implements EvaluatableInt{
 
 
 	// other stuff
-	public function evaluate(int $value):int {
+	public function evaluate($value) {
 		$result = 0;
 		foreach($this->summands as $summand){
 			$result+=$summand->evaluate($value);
@@ -151,6 +162,13 @@ class Polynomial implements EvaluatableInt{
 	public function divNumber(int $a):Polynomial{
 		foreach($this->summands as &$summand){
 			$summand->divNumber($a);
+		}
+		return $this;
+	}
+
+	public function divRational(RationalNumber $r):Polynomial{
+		foreach($this->summands as &$summand){
+			$summand->setRationalNumber($summand->getRationalNumber()->mul(new \Math\RationalNumber($r->getQ(), $r->getP())));
 		}
 		return $this;
 	}

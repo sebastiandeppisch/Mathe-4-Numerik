@@ -16,6 +16,11 @@ class RPolynomialSummand extends PolynomialSummand{
         return $this->number;
     }
 
+    public function setRationalNumber(RationalNumber $number){
+        $this->number=$number;
+        return $this;
+    }
+
 
     public function getVariable(){
         return $this->variable;
