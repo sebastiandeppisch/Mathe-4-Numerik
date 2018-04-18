@@ -14,7 +14,6 @@ abstract class Controller{
 			if(isset($parameters[$field["name"]])){
 				$parameter = $parameters[$field["name"]];
 			}else{
-				var_dump($parameters);
 				$parameter = $field["default"];
 				$this->parameters[$field["name"]]=$parameter;
 			}
