@@ -3,8 +3,12 @@ namespace Math;
 class MFunction implements EvaluatableFloat{
 	private $func;
 	public function __construct(string $func){
+		$e = exp(1);
 		$func = preg_replace("/([0-9]+)(x)/", "$1*$2", $func);
 		$func = preg_replace("/(x)\^([0-9]+)/", "pow($1,$2)", $func);
+		$func = preg_replace("/(e)\^([0-9]+)/", "pow(e,$2)", $func);
+		$func = str_replace("e^(x)", "pow(".$e.",x)", $func);
+		$func = str_replace("e^x", "pow(".$e.",x)", $func);
 		$this->func=$func;
 	}
 
