@@ -2,7 +2,7 @@
 namespace Math;
 
 use Exception\DivisionNullException;
-class FloatNumber{
+class FloatNumber extends Number{
 	private $f;
 	public function __construct(float $f){
 		$this->setF($f);

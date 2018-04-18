@@ -2,7 +2,7 @@
 namespace Math;
 
 use Math\Exception\DivisionNullException;
-class RationalNumber{
+class RationalNumber extends Number{
 	private $p;
 
 	private $q;
