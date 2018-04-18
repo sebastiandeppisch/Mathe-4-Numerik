@@ -18,7 +18,7 @@ abstract class Newton{
 	abstract public function getX($n);
 
 	public function getY($x){
-		if($x instanceof RationalNumber){
+		if($x instanceof RationalNumber || $x instanceof FloatNumber){
 			$x = $x->evaluate();
 		}
 		return (float) $this->func->evaluate($x);
@@ -34,7 +34,7 @@ abstract class Newton{
 
 	public function getF($j, $jk=false){
 		if($jk===false || $j===$jk){
-			return $this->getY($this->getX($j));
+			return $this->getY($j);
 		}
 		$f =  ($this->getF($j+1, $jk)-$this->getF($j, $jk-1))/($this->getX($jk)- $this->getX($j));
 		return $f;
