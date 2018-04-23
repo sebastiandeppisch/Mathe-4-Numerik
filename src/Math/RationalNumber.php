@@ -6,7 +6,7 @@ class RationalNumber extends Number{
 	private $p;
 
 	private $q;
-	public function __construct(int $p, int $q){
+	public function __construct(int $p, int $q=1){
 		$this->setP($p);
 		$this->setQ($q);
 	}
