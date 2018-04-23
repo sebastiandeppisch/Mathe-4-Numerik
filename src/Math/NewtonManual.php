@@ -15,13 +15,19 @@ class NewtonManual extends Newton{
 		if(!is_numeric($n)){
 			$n = $n->evaluate();
 		}
-		return $this->xNodes[$n]->evaluate();
+		if($this->yNodes[$n] instanceof Number){
+			return $this->xNodes[$n]->evaluate();
+		}
+		return $this->yNodes[$n];
 	}
 
 	public function getY($n){
 		if(!is_numeric($n)){
 			$n = $n->evaluate();
 		}
-		return $this->yNodes[$n]->evaluate();
+		if($this->yNodes[$n] instanceof Number){
+			return $this->yNodes[$n]->evaluate();
+		}
+		return $this->yNodes[$n];
 	}
 }
