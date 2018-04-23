@@ -103,4 +103,27 @@ class Matrix{
         }
         return $c;
     }
+
+    public function mulScalarRow($i, $number):Matrix{
+        $number = $this->convertNumber($number);
+        for($j=0;$j<$this->getNCols();$j++){
+            $this->get($i, $j)->mul($number);
+        }
+        return $this;
+    }
+
+    public function mulScalar($number):Matrix{
+        $number = $this->convertNumber($number);
+        for($i=0;$i<$this->getNRows();$i++){
+            $this->mulScalarRow($i, $number);
+        }
+        return $this;
+    }
+
+    public function exchangeRows($a, $b):Matrix{
+        $temp = $this->data[$a];
+        $this->data[$a]=$this->data[$b];
+        $this->data[$b]=$temp;
+        return $this;
+    }
 }

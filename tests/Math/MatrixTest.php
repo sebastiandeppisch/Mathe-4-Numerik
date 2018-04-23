@@ -169,4 +169,52 @@ class MatrixTest extends Testcase{
         ]);
         $this->assertEquals($result, $c);
     }
+
+    public function testMulScalar(){
+        $a = new Matrix(2, 3);
+        $a->setArray([
+            [1, 2, 3],
+            [3, 1, 1]
+        ]);
+        $a->mulScalar(5);
+
+        $result = new Matrix(2, 3);
+        $result->setArray([
+            [5, 10, 15],
+            [15, 5, 5]
+        ]);
+        $this->assertEquals($result, $a);
+    }
+
+    public function testMulScalarRow(){
+        $a = new Matrix(2, 3);
+        $a->setArray([
+            [1, 2, 3],
+            [3, 1, 1]
+        ]);
+        $a->mulScalarRow(1,5);
+
+        $result = new Matrix(2, 3);
+        $result->setArray([
+            [1, 2, 3],
+            [15, 5, 5]
+        ]);
+        $this->assertEquals($result, $a);
+    }
+
+    public function testExchangeRows(){
+        $a = new Matrix(2, 3);
+        $a->setArray([
+            [1, 2, 3],
+            [3, 1, 1]
+        ]);
+
+        $result = new Matrix(2, 3);
+        $result->setArray([
+            [3, 1, 1],
+            [1, 2, 3]
+        ]);
+        $a->exchangeRows(0, 1);
+        $this->assertEquals($result, $a);
+    }
 }
