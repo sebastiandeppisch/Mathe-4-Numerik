@@ -16,7 +16,12 @@ class Matrix{
     }
 
     public function checkCoordiantes(int $i, int $j){
-
+        if($i >= $this->rows){
+            throw new \Exception("TODO");
+        }
+        if($j >= $this->cols){
+            throw new \Exception("TODO");
+        }
     }
 
     public function set(int $i, int $j, $number){
@@ -51,5 +56,51 @@ class Matrix{
                 $this->set($i, $j, $newData[$i][$j]);
             }
         }
+    }
+
+    public function getArray(){
+        return $this->data;
+    }
+
+    public function getTransposed(): Matrix{
+        $transposed = new Matrix($this->cols, $this->rows);
+        for($i=0;$i<$this->rows;$i++){
+            for($j=0;$j<$this->cols;$j++){
+                $transposed->set($j, $i, $this->get($i, $j));
+            }
+        }
+        return $transposed;
+    }
+
+    public function getNRows(){
+        return $this->rows;
+    }
+
+    public function getNCols(){
+        return $this->cols;
+    }
+
+    public function mul(Matrix $rhs):Matrix{
+        $result = new Matrix($this->getNRows(), $rhs->getNCols());
+        for($i=0;$i<$result->getNRows();$i++){
+            for($k=0;$k<$result->getNCols();$k++){
+                $result->set($i, $k, self::getC($this, $rhs, $i, $k));
+            }
+        }
+
+        return $result;
+    }
+
+    static public function getC(Matrix $a, Matrix $b, int $i, int $k):Number{
+        if($b->getNRows() != $a->getNCols()){
+            throw new \Exception("TODO");
+        }
+        $c=new RationalNumber(0);
+        for($j=0;$j<$a->getNCols();$j++){
+            $a_ij=$a->get($i, $j)->copy();
+            $b_jk=$b->get($j, $k)->copy();
+            $c->add($a_ij->mul($b_jk));
+        }
+        return $c;
     }
 }
