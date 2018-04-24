@@ -5,6 +5,6 @@ pipelines:
         caches:
           - composer
         script:
-         # - composer update
+          - composer install
           - phpunit
           - cp report test-reports -r
