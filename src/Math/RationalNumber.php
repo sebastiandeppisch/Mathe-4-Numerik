@@ -130,4 +130,12 @@ class RationalNumber extends Number{
 		}
 		return new RationalNumber($p, $q);
 	}
+
+	public function reciprocal(){
+		return new RationalNumber($this->getQ(), $this->getP());
+	}
+
+	public function negate(){
+		return new RationalNumber(-1*$this->getP(), $this->getQ());
+	}
 }

@@ -50,4 +50,12 @@ class FloatNumber extends Number{
 	public function signed(){
 		return $this->getF() < 0;
 	}
+
+	public function reciprocal(){
+		return new FloatNumber(1/$this->getF());
+	}
+
+	public function negate(){
+		return new FloatNumber(-1*$this->getF());
+	}
 }
