@@ -6,5 +6,5 @@ pipelines:
           - composer
         script:
          # - composer update
-          - vendor/bin/phpunit
+          - phpunit
           - cp report test-reports -r
