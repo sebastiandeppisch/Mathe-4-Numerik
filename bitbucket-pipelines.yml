@@ -5,12 +5,6 @@ pipelines:
         caches:
           - composer
         script:
-          - composer update
-          #- touch .env
-          - cp .env.example .env
-          - php artisan key:generate
-          - cat .env
-          - chmod 777 storage bootstrap/cache -Rv
-          - touch storage/database.sqlite
+         # - composer update
           - vendor/bin/phpunit
           - cp report test-reports -r
