@@ -1,0 +1,10 @@
+mage: phpunit/phpunit:5.0.3
+pipelines:
+  default:
+    - step:
+        caches:
+          - composer
+        script:
+          - composer update
+          - vendor/bin/phpunit
+          - cp report test-reports -r
