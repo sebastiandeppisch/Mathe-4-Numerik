@@ -48,4 +48,8 @@ class SystemOfLinearEquations{
 	public function getMatrix():Matrix{
 		return $this->matrix;
 	}
+
+	public function getVector():Vector{
+		return $this->vector;
+	}
 }
