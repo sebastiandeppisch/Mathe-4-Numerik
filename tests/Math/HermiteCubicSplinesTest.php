@@ -56,4 +56,36 @@ class HermiteCubicSplinesTest extends Testcase{
         $this->assertEquals(2, $splines->getH(0)->evaluate());
         $this->assertEquals(7, $splines->getH(1)->evaluate());
     }
+
+    public function testM(){
+        $splines = new HermiteCubicSplines([0, 1, 2, 3, 4, 5], [0, 1, -1, 2, 0, 1], new RationalNumber(-2), new RationalNumber(-2));
+        $les = $splines->getSystemOfLinearEquation();
+        $result = $les->solve();
+        $this->assertEquals([
+            new RationalNumber(282,19),
+            new RationalNumber(-222, 19),
+            new RationalNumber(264, 19),
+             new RationalNumber(-264, 19),
+             new RationalNumber(222, 19),
+             new RationalNumber(-282, 19)
+        ], $result);
+    }
+
+    public function testM2(){
+        $splines = new HermiteCubicSplines([0, 1, 2, 3, 4, 5], [0, 1, -1, 2, 0, 1], new RationalNumber(0), new RationalNumber(0)); //TODO Iin den Folien steht für diese Beipsiel -1, aber die Zahlen hier stimmen mit 0 überein
+        $les = $splines->getSystemOfLinearEquation();
+        $result = $les->solve();
+        foreach($result as $r){
+            var_dump($r->evaluate());
+        }
+        /*$this->assertEquals([
+            new RationalNumber(282,19),
+            new RationalNumber(-222, 19),
+            new RationalNumber(264, 19),
+             new RationalNumber(-264, 19),
+             new RationalNumber(222, 19),
+             new RationalNumber(-282, 19)
+        ], $result);*/
+        $this->assertTrue(true);
+    }
 }
