@@ -217,4 +217,15 @@ class MatrixTest extends Testcase{
         $a->exchangeRows(0, 1);
         $this->assertEquals($result, $a);
     }
+
+    public function testSetZero(){
+        $m = new Matrix(2, 2);
+        $m->setZero();
+        $rm = new Matrix(2, 2);
+        $rm->setArray([
+            [0, 0],
+            [0, 0]
+        ]);
+        $this->assertEquals($rm, $m);
+    }
 }

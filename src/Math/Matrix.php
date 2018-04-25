@@ -126,4 +126,12 @@ class Matrix{
         $this->data[$b]=$temp;
         return $this;
     }
+
+    public function setZero(){
+        for($i=0;$i<$this->rows;$i++){
+            for($j=0;$j<$this->cols;$j++){
+                $this->set($i, $j, new RationalNumber(0));
+            }
+        }
+    }
 }
