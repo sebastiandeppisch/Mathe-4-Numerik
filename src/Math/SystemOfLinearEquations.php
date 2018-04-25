@@ -33,6 +33,21 @@ class SystemOfLinearEquations{
 			}
 		}
 	}
+
+	public function solve():array{
+		$this->elliminate();
+		$result=[];
+		for($i=$this->matrix->getNRows()-1;$i>=0;$i--){
+			$number = $this->vector->get($i);
+			for($j=$this->matrix->getNRows()-1;$j>$i;$j--){
+				$c = $this->matrix->get($i, $j);
+				$number->add($c->mul($result[$j])->negate());
+			}
+			$number=$number->mul($this->matrix->get($i, $i)->reciprocal());
+			$result[$i]=$number;
+		}
+		return $result;
+	}
 	
 	static public function getElliminateFactor(Number $a, Number $b):Number{
 		return $b->negate()->mul($a->reciprocal());
