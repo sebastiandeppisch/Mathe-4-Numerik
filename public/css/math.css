@@ -39,3 +39,11 @@
 	align-items: center;
 	display: flex;
 }
+
+.systemoflinearequations{
+	display: flex;
+}
+
+.systemoflinearequations td{
+	padding: 10px;
+}

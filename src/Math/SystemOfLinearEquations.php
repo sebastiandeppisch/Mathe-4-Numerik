@@ -14,9 +14,12 @@ class SystemOfLinearEquations{
 		$this->vector=$right;
 
 		if(count($variables) === 0){
+			$this->variables=[];
 			for($i=0;$i<$right->getNRows();$i++){
 				$this->variables[$i]="x_".$i;
 			}
+		}else{
+			$this->variables=$variables;
 		}
 	}
 
@@ -51,5 +54,46 @@ class SystemOfLinearEquations{
 
 	public function getVector():Vector{
 		return $this->vector;
+	}
+
+	public function toHTML(){
+		$html = '<div class="systemoflinearequations">';
+		
+		$html.='<div class="fontMaxSize"></div>';
+		$html .= "<table><tbody>";
+
+		for($i=0;$i<$this->matrix->getNRows();$i++){
+			$html.="<tr>";
+			if($i==0){
+				$html.="<td rowspan=".$this->matrix->getNRows().">(</td>";
+			}
+			
+			for($j=0;$j<$this->matrix->getNCols();$j++){
+				$html.="<td>".$this->matrix->get($i, $j)->toHTML()."</td>";
+			}
+
+			if($i==0){
+				$html.="<td rowspan=".$this->matrix->getNRows().">)</td>";
+				$html.="<td rowspan=".$this->matrix->getNRows().">(</td>";
+			} 
+
+			$html.="<td>".$this->variables[$i]."</td>";
+			if($i==0){
+				$html.="<td rowspan=".$this->matrix->getNRows().">)</td>";
+				$html.="<td rowspan=".$this->matrix->getNRows().">(</td>";
+			} 
+			$html.="<td>".$this->vector->get($i)->toHTML()."</td>";
+			if($i==0){
+				$html.="<td rowspan=".$this->matrix->getNRows().">)</td>";
+			} 
+	
+			$html.="</tr>";
+		}
+		
+		$html .="</tbody></table>";
+
+
+		$html .="</div>";
+		return $html;
 	}
 }

@@ -9,7 +9,8 @@ class MainController{
 		"PolynomExampleController" => "Polynom Formattierungs Beispiel",
 		"FunctionExampleController" => "Funktionsauswertung Beispiel",
 		"LagrangeController" => "Lagrange Interpolation",
-		"NewtonController" => "Newton Interpolation"
+		"NewtonController" => "Newton Interpolation",
+		"CubicSplinesController" => "Kubische Splines Interpolation"
 	];
 
 	public function __construct($controller){
@@ -52,7 +53,7 @@ class MainController{
 	}
 
 	public function getChartHTML(){
-		if($this->controller !== NULL){
+		if($this->controller !== NULL && $this->controller->getChart() !== NULL){
 			return $this->controller->getChart()->getHTML();
 		}
 	}
