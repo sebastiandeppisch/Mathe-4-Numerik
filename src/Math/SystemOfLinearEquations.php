@@ -44,4 +44,8 @@ class SystemOfLinearEquations{
 		}
 		$this->vector->get($a)->add($this->vector->get($b)->copy()->mul($mul));
 	}
+
+	public function getMatrix():Matrix{
+		return $this->matrix;
+	}
 }
