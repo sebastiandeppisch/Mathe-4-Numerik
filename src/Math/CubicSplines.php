@@ -76,8 +76,8 @@ abstract class CubicSplines{
 
 				$vector->set($i, $this->getB0());
 			}elseif($i === $this->getDegree()){
-				$matrix->set($i, $i-1, $this->getMuN());
-				$matrix->set($i, $i, $this->getLambdaN());
+				$matrix->set($i, $i-1, $this->getLambdaN());
+				$matrix->set($i, $i, $this->getMuN());
 
 				$vector->set($i, $this->getBN());
 			}else{
