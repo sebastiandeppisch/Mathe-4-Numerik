@@ -113,6 +113,8 @@ class RationalNumber extends Number{
 			$gcd = $this->gcd(abs($this->p), abs($this->q));
 			$this->p=$this->p/$gcd;
 			$this->q=$this->q/$gcd;
+		}else{
+			$this->q=1;
 		}
 	}
 

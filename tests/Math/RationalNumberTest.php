@@ -83,7 +83,7 @@ class RationalNumberTest extends Testcase{
         $a = new RationalNumber(0, 0);
         $a->reduce();
         $this->assertEquals(0, $a->getP());
-        $this->assertEquals(0, $a->getQ());
+        $this->assertEquals(1, $a->getQ());
 
         $b = new RationalNumber(1, 1);
         $b->reduce();
