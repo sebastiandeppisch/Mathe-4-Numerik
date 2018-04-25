@@ -17,10 +17,10 @@ class Matrix{
 
     public function checkCoordiantes(int $i, int $j){
         if($i >= $this->rows){
-            throw new \Exception("TODO");
+            throw new \Exception("out of row-boundary".$i);
         }
         if($j >= $this->cols){
-            throw new \Exception("TODO");
+            throw new \Exception("out of col-boundary".$j);
         }
     }
 
