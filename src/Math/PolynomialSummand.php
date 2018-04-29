@@ -81,7 +81,7 @@ abstract class PolynomialSummand{
     }
 
     public function derivate():PolynomialSummand{
-        $number = $this->getNumber()->mul(new RationalNumber($this->getExponentiation()));
+        $number = $this->getNumber()->copy()->mul(new RationalNumber($this->getExponentiation()));
         $exp = $this->getExponentiation()-1;
         $s = $this->copy();
         $s->number=$number;
