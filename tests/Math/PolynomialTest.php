@@ -138,4 +138,10 @@ class PolynomialTest extends Testcase{
         $a->addString("x^2+x^3")->addString("-x^2-x^3");
         $this->assertEquals("0", $a->toString());
     }
+/*
+    public function testaddStringRationalNumber(){
+        $a = new Polynomial();
+        $a->addString("(681/209)x^3-(2786/209)x^2+(167/11)x-(859/209)");
+        $this->assertEquals("-(859/209)+(167/11)x-(2786/209)x^2+(681/209)x^3", $a->toString());
+    }*/
 }
