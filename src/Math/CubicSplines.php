@@ -19,7 +19,7 @@ abstract class CubicSplines{
 			$n = $n->evaluate();
 		}
 		if($this->xNodes[$n] instanceof Number){
-			return $this->xNodes[$n];
+			return $this->xNodes[$n]->copy();
 		}
 		if(is_int($this->xNodes[$n])){
 			return new RationalNumber($this->xNodes[$n]);
@@ -32,7 +32,7 @@ abstract class CubicSplines{
 			$n = $n->evaluate();
 		}
 		if($this->yNodes[$n] instanceof Number){
-			return $this->yNodes[$n];
+			return $this->yNodes[$n]->copy();
 		}
 		if(is_int($this->yNodes[$n])){
 			return new RationalNumber($this->yNodes[$n]);
@@ -96,5 +96,57 @@ abstract class CubicSplines{
 
 	public function getBoundarys(){
 
+	}
+
+	public function getM(int $i):Number{
+		$solution = $this->getSystemOfLinearEquation()->solve();
+		return $solution[$i];
+	}
+
+	public function getD(int $i):Number{ //d_i = y_i - (h_i^2 / 6)*M_i
+		$number = $this->getY($i)->copy();
+		return $number->add($this->getH($i)->mul($this->getH($i))->mul(new RationalNumber(1, 6))->mul($this->getM($i))->negate());
+	}
+
+	public function getC(int $i):Number{//c_i = (y_(i+1) - d_i)/h_i - (h_i/6)*(M_(i+1))
+		$y = $this->getY($i+1);
+		$d = $this->getD($i);
+		$h = $this->getH($i);
+		$number =$y->add($d->negate())->mul($h->reciprocal()); //(y_(i+1) - d_i)/h_i
+		return $number->add($this->getH($i)->mul(new RationalNumber(1, 6))->mul($this->getM($i+1))->negate()); // - h_i/6 (M_(i+1)
+
+	}
+
+	public function getS(int $i):Polynomial{
+		$s = new Polynomial();
+		$xi1 = new Polynomial();
+		$xi1->addSummand(new RPolynomialSummand($this->getX($i+1), 0)); //x_(i+1)
+		$xi1->addSummand(new RPolynomialSummand(new RationalNumber(-1, 1), 1)); // -x
+		$temp = $xi1->mul($xi1)->mul($xi1); // ()^3
+		$temp->divRational($this->getH($i));
+		$Mi = new Polynomial();
+		$Mi->addSummand(new \Math\RPolynomialSummand($this->getM($i), 0));
+		$temp = $temp->mul($Mi);
+		$s->add($temp);
+
+		$xi = new Polynomial();
+		$xi->addSummand(new RPolynomialSummand($this->getX($i)->negate(), 0)); //x_(i)
+		$xi->addSummand(new RPolynomialSummand(new RationalNumber(1, 1), 1)); // x
+		$temp = $xi->mul($xi)->mul($xi);
+		$temp->divRational($this->getH($i));
+		$Mi1 = new Polynomial();
+		$Mi1->addSummand(new \Math\RPolynomialSummand($this->getM($i+1), 0));
+		$temp = $temp->mul($Mi1);
+		$s->add($temp);
+
+		$sixth = new Polynomial();
+		$sixth->addSummand(new RPolynomialSummand(new RationalNumber(1, 6), 0));
+		$s = $s->mul($sixth);
+		
+		$s->addSummand(new RPolynomialSummand($this->getC($i), 1));
+		$s->addSummand(new RPolynomialSummand($this->getC($i)->mul($this->getX($i)->negate()), 0));
+		$s->addSummand(new RPolynomialSummand($this->getD($i), 0));
+
+		return $s;
 	}
 }
