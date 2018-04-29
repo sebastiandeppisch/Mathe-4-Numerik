@@ -57,23 +57,34 @@ class CubicSplinesController extends Controller{
 		$splines = $this->getSplines();
 		$chart = new ChartController("Kubische Splines");
 		$chartS = new ChartConTroller("S-Komplett");
+		$chartD = new ChartController("Kubische Splines 1-fache Ableitung");
+		$chartDD = new ChartController("Kubische Splines 2-fache Ableitung");
 		$parts=[];
+		$partsD=[];
+		$partsDD=[];
 		for($i=0;$i<$splines->getDegree();$i++){
 			$from = $splines->getX($i)->evaluate();
 			$to = $splines->getX($i+1)->evaluate();
 			$spline = $splines->getS($i)->toString();
+			$splineD= $splines->getS($i)->derivate()->toString();
+			$splineDD= $splines->getS($i)->derivate()->derivate()->toString();
 			$parts[]=new PartialMFunction(new MFunction($spline), $from, $to);
+			$partsD[]=new PartialMFunction(new MFunction($splineD), $from, $to);
+			$partsDD[]=new PartialMFunction(new MFunction($splineDD), $from, $to);
 			$chartS->addChart(new MFunction($this->getSplines()->getS($i)->toString()), "s_".$i);
 		}
 		$chart->addChart(new \Math\MFunctionSet($parts), "s(x)");
+		$chartD->addChart(new \Math\MFunctionSet($partsD), "s'(x)");
+		$chartDD->addChart(new \Math\MFunctionSet($partsDD), "s''(x)");
 		
-		$chart->setFrom($this->data["xnodes"][0]->evaluate())
-			->setTo(end($this->data["xnodes"])->evaluate());
-		$chartS->setFrom($this->data["xnodes"][0]->evaluate())
-		->setTo(end($this->data["xnodes"])->evaluate());
-
 		$charts[]=$chart;
 		$charts[]=$chartS;
+		$charts[]=$chartD;
+		$charts[]=$chartDD;
+		foreach($charts as &$c){
+			$c->setFrom($this->data["xnodes"][0]->evaluate())
+			->setTo(end($this->data["xnodes"])->evaluate());
+		}
 		return $charts;
 	}
 }
