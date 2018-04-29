@@ -54,7 +54,16 @@ class MainController{
 
 	public function getChartHTML(){
 		if($this->controller !== NULL && $this->controller->getChart() !== NULL){
-			return $this->controller->getChart()->getHTML();
+			if(is_array($this->controller->getChart())){
+				$html = "";
+				foreach($this->controller->getChart() as $chart){
+					$html.=$chart->getHTML();
+				}
+				return $html;
+			}else{
+				return $this->controller->getChart()->getHTML();
+			}
+			
 		}
 	}
 }

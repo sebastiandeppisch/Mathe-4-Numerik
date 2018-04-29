@@ -2,6 +2,7 @@
 namespace Controller;
 use Math\MFunction;
 use \Khill\Lavacharts\Lavacharts;
+use Math\EvaluatableFloat;
 class ChartController{
 	private $charts=array();
 
@@ -15,7 +16,7 @@ class ChartController{
 		$this->label=$name;
 	}
 
-	public function addChart(MFunction $func, $name){
+	public function addChart(EvaluatableFloat $func, $name){
 		$chart = new \stdClass();
 		$chart->func=$func;
 		$chart->name=$name;
@@ -33,8 +34,13 @@ class ChartController{
 		return $this;
 	}
 
+	private static $lava=null;
+
 	public function getHTML(){
-		$lava = new \Khill\Lavacharts\Lavacharts;
+		if(self::$lava === null){
+			self::$lava = new \Khill\Lavacharts\Lavacharts;
+		}
+		$lava = self::$lava;
 
 		$chart = $lava->DataTable();
 
@@ -43,12 +49,23 @@ class ChartController{
 			$chart->addNumberColumn($c->name);
 		}
 		for($i=$this->from*100;$i<=$this->to*100;$i++){
-			$chart->addRow([$i/100, $this->charts[0]->func->evaluate($i/100), $this->charts[1]->func->evaluate($i/100)]);
+			$charts=[];
+			$charts[]=$i/100;
+			foreach($this->charts as $c){
+				$y = $c->func->evaluate($i/100);
+				if($y !== null){
+					$charts[]=$y;
+				}
+				
+			}
+			$chart->addRow($charts);
 		}
 		$lava->LineChart($this->label, $chart);
 
-		$html='<div id="chart" style="height:500px"></div>';
-		$html.=$lava->render('LineChart', $this->label, 'chart');
+		$id = 'chart'.uniqid();
+
+		$html='<div id="'.$id.'" style="height:500px"></div>';
+		$html.=$lava->render('LineChart', $this->label, $id);
 		return $html;
 	}
 }
