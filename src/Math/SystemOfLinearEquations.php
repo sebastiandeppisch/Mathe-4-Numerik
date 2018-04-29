@@ -111,4 +111,24 @@ class SystemOfLinearEquations{
 		$html .="</div>";
 		return $html;
 	}
+
+	public function getVariableHTML($i){
+		return preg_replace("/([a-zA-Z]+)(?:_)([0-9]+)/", "$1<sub>$2</sub>", $this->variables[$i]);
+	}
+
+	public function solutionToHTML(){
+		$solution = $this->solve();
+		$html = "<div style='display:flex:'>";
+		
+		for($i=0;$i<count($solution);$i++){
+			$html.="<div style='padding:10px;'>";
+			$html.=$this->getVariableHTML($i);
+			$html.="=";
+			$html.=$solution[$i]->toHTML();
+			$html.="</div>";
+		}
+		
+		$html.="</div>";
+		return $html;
+	}
 }

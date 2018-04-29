@@ -80,4 +80,18 @@ class SystemOfLinearEquationsTest extends Testcase{
 
 		$this->assertEquals([new RationalNumber(5), new RationalNumber(-5), new RationalNumber(2)], $solution);
 	}
+
+	public function testgetVariableHTML(){
+		$m1 = new Matrix(3, 3);
+		$m1->setArray([
+			[1, 2, 3],
+			[0, -1, -2],
+			[0, 0, 2]
+		]);
+
+		$v1 = new Vector(3);
+		$v1->setArray([1, 1, 4]);
+		$a = new SystemOfLinearEquations($m1, $v1);
+		$this->assertEquals("x<sub>0</sub>", $a->getVariableHTML(0));
+	}
 }
