@@ -144,4 +144,11 @@ class PolynomialTest extends Testcase{
         $a->addString("(681/209)x^3-(2786/209)x^2+(167/11)x-(859/209)");
         $this->assertEquals("-(859/209)+(167/11)x-(2786/209)x^2+(681/209)x^3", $a->toString());
     }*/
+
+    public function testDerivate(){
+        $d = new Polynomial();
+        $d->addString("10x^2+5x+4");
+        $d = $d->derivate();
+        $this->assertEquals("5+20x", $d->toString());
+    }
 }

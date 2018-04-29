@@ -79,4 +79,13 @@ abstract class PolynomialSummand{
     public function toHTML($signed=true){
         return '<div class="polynomialsummand">'.$this->toInnerHTML($signed).'</div>';
     }
+
+    public function derivate():PolynomialSummand{
+        $number = $this->getNumber()->mul(new RationalNumber($this->getExponentiation()));
+        $exp = $this->getExponentiation()-1;
+        $s = $this->copy();
+        $s->number=$number;
+        $s->exponentiation=$exp;
+        return $s;
+    }
 }

@@ -187,4 +187,12 @@ class Polynomial{
 		}
 		return $this;
 	}
+
+	public function derivate():Polynomial{
+		$p = new Polynomial();
+		foreach($this->getSummands() as $summand){
+			$p->addSummand($summand->derivate());
+		}
+		return $p;
+	}
 }
