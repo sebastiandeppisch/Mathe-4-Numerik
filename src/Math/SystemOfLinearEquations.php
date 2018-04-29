@@ -34,7 +34,12 @@ class SystemOfLinearEquations{
 		}
 	}
 
+	private $solution=null;
+
 	public function solve():array{
+		if($this->solution !== null){
+			return $this->solution;
+		}
 		$this->elliminate();
 		$result=[];
 		for($i=$this->matrix->getNRows()-1;$i>=0;$i--){
@@ -46,6 +51,7 @@ class SystemOfLinearEquations{
 			$number=$number->mul($this->matrix->get($i, $i)->reciprocal());
 			$result[$i]=$number;
 		}
+		$this->solution=$result;
 		return $result;
 	}
 	

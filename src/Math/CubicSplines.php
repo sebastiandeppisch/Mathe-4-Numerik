@@ -62,7 +62,11 @@ abstract class CubicSplines{
 		return $xi1->add($xi->negate());
 	}
 
+	private $sole=null;
 	public function getSystemOfLinearEquation(){
+		if($this->sole!==null){
+			return $this->sole;
+		}
 		$matrix = new Matrix($this->getDegree()+1, $this->getDegree()+1);
 		$matrix->setZero();
 		$vector = new Vector($this->getDegree()+1);
@@ -91,7 +95,9 @@ abstract class CubicSplines{
 			}
 			$variables[]="M_".$i;
 		}
-		return new \Math\SystemOfLinearEquations($matrix, $vector, $variables);
+		$system= new \Math\SystemOfLinearEquations($matrix, $vector, $variables);
+		$this->sole=$system;
+		return $system;
 	}
 
 	public function getBoundarys(){
@@ -117,7 +123,12 @@ abstract class CubicSplines{
 
 	}
 
+	private $s=[];
+
 	public function getS(int $i):Polynomial{
+		if(array_key_exists($i, $this->s)){
+			return $this->s[$i];
+		}
 		$s = new Polynomial();
 		$xi1 = new Polynomial();
 		$xi1->addSummand(new RPolynomialSummand($this->getX($i+1), 0)); //x_(i+1)
@@ -146,7 +157,7 @@ abstract class CubicSplines{
 		$s->addSummand(new RPolynomialSummand($this->getC($i), 1));
 		$s->addSummand(new RPolynomialSummand($this->getC($i)->mul($this->getX($i)->negate()), 0));
 		$s->addSummand(new RPolynomialSummand($this->getD($i), 0));
-
+		$this->s[$i]=$s;
 		return $s;
 	}
 }
