@@ -1,5 +1,5 @@
 <?php
-class Fraction implements Evaluatable{
+/*class Fraction implements Evaluatable{
 	private $denominator;
 
 	private $numerator;
@@ -8,4 +8,4 @@ class Fraction implements Evaluatable{
 		$this->numerator=$numerator;
 	}
 
-}
+}*/

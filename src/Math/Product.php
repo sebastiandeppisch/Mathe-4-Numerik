@@ -1,5 +1,5 @@
 <?php
-class Product implements Evaluatable{
+/*class Product implements Evaluatable{
 	private $factors;
 
 	private $numerator;
@@ -8,4 +8,4 @@ class Product implements Evaluatable{
 		$this->numerator=$numerator;
 	}
 
-}
+}*/
