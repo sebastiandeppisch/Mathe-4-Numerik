@@ -2,6 +2,8 @@
 namespace Controller;
 
 use Math\NaturalCubicSplines;
+use Math\HermiteCubicSplines;
+use Math\RationalNumber;
 use Math\MFunction;
 use Math\PartialMFunction;
 
@@ -18,15 +20,52 @@ class CubicSplinesController extends Controller{
 			"name"=>"ynodes",
 			"description"=>"Y-Werte",
 			"default" => "1,2,1,4",
-		]
+		],
+		[
+			"type"=>"select",
+			"name"=>"type",
+			"description"=>"Randbedingungen",
+			"default" => "natural",
+			"values"=>[
+				"natural" => "Natürliche Randbedingungen",
+				"hermite" => "Hermitsche Randbedingungen"
+			]
+		],
+		[
+			"type"=>"int",
+			"name"=>"derivativeA",
+			"description"=>"f'(a)",
+			"default" => "0",
+			"show" => [
+				[
+					"name" => "type",
+					"value" => "hermite"
+				]
+			]
+		],
+		[
+			"type"=>"int",
+			"name"=>"derivativeB",
+			"description"=>"f'(b)",
+			"default" => "0",
+			"show" => [
+				[
+					"name" => "type",
+					"value" => "hermite"
+				]
+			]
+		],
 	];
 
 	private $splines;
 
 	public function setData($parameters){
 		parent::setData($parameters);
-		$this->splines = new NaturalCubicSplines($this->data["xnodes"], $this->data["ynodes"]);
-		//$this->splines = new NaturalCubicSplines([0, 1,2], [1,2,1]);
+		if($this->data["type"]=="hermite"){
+			$this->splines = new HermiteCubicSplines($this->data["xnodes"], $this->data["ynodes"], new RationalNumber($this->data["derivativeA"]), new RationalNumber($this->data["derivativeB"]));
+		}else{
+			$this->splines = new NaturalCubicSplines($this->data["xnodes"], $this->data["ynodes"]);
+		}
 	}
 
 	public function getSplines(){
