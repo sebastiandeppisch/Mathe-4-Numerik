@@ -5,12 +5,14 @@ class FunctionExampleController extends Controller{
 		[
 			"type"=>"function",
 			"name"=>"function",
-			"description"=>"Funktion"
+			"description"=>"Funktion",
+			"default" => "x^2"
 		],
 		[
 			"type"=>"int",
 			"name"=>"number",
-			"description"=>"Auswerten an"
+			"description"=>"Auswerten an",
+			"default" => "2"
 		]
 	];
 

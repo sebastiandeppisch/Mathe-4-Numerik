@@ -5,12 +5,14 @@ class PolynomExampleController extends Controller{
 		[
 			"type"=>"polynom",
 			"name"=>"polynom",
-			"description"=>"Polynom"
+			"description"=>"Polynom",
+			"default"=> "3x^4+12x^1+5"
 		],
 		[
 			"type"=>"number",
 			"name"=>"div",
-			"description"=>"Teilen durch"
+			"description"=>"Teilen durch",
+			"default" => "4"
 		]
 	];
 
