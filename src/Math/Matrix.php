@@ -33,13 +33,16 @@ class Matrix{
         if($number instanceof Number){
             return $number;
         }
+        if(is_string($number)){
+            return RationalNumber::fromString($number);
+        }
         if(is_float($number)){
             return new FloatNumber($number);
         }
         if(is_int($number)){
             return new RationalNumber($number);
         }
-        throw new \Excpetion($number." is not a correct number");
+        throw new \Exception($number." is not a correct number");
     }
 
     public function get(int $i, int $j){
@@ -134,4 +137,20 @@ class Matrix{
             }
         }
     }
+
+    public function toHTML(){
+		$html = '<div class="matrix">';
+		$html.='<div class="fontMaxSize"></div>';
+		$html .= "<table><tbody>";
+		for($i=0;$i<$this->getNRows();$i++){
+			$html.="<tr>";
+			for($j=0;$j<$this->getNCols();$j++){
+				$html.="<td>".$this->get($i, $j)->toHTML()."</td>";
+			}
+			$html.="</tr>";
+		}
+		$html .="</tbody></table>";
+		$html .="</div>";
+		return $html;
+	}
 }

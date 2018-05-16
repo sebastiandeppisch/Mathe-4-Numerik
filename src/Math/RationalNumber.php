@@ -70,7 +70,7 @@ class RationalNumber extends Number{
 
 	public function gcd($a, $b){
 		if($a < 1 || $b < 1){
-			throw new Exception("a or b less than 1");
+			throw new \Exception("a or b less than 1");
 		}
 		$r = 0;
 		do{

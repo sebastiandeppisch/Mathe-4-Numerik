@@ -1,5 +1,6 @@
 <?php 
 namespace Controller;
+use Math\Matrix;
 abstract class Controller{
 
 	static protected $controller=["PolynomExampleController"];
@@ -33,6 +34,13 @@ abstract class Controller{
 					foreach($ps as $rational){
 						$data[] = \Math\RationalNumber::fromString($rational);
 					}
+				break;
+				case "matrix":
+					$rows =count($parameter);
+					$cols = count($parameter[0]);
+					$matrix = new Matrix($rows, $cols);
+					$matrix->setArray($parameter);
+					$data=$matrix;
 				break;
 			}
 			$this->data[$field["name"]]=$data;
@@ -72,27 +80,48 @@ abstract class Controller{
 	public function getInputHTML(){
 		$html='<form>';
 		foreach(static::$inputFields as $field){
-			if($field["type"]=="select"){
-				$html.='<div class="form-group"><label for="'.$field["name"].'">'.$field["description"].'</label>';
-				$html.='<select class="form-control" id="'.$field["name"].'" name="'.$field["name"].'">';
-				foreach($field["values"] as $key => $value){
-					if(isset($this->parameters[$field["name"]]) && $this->parameters[$field["name"]]==$key){
-						$html.='<option value="'.$key.'" selected>'.$value.'</option>';
-					}else{
-						$html.='<option value="'.$key.'">'.$value.'</option>';
+			switch($field["type"]){
+				case "select":
+					$html.='<div class="form-group"><label for="'.$field["name"].'">'.$field["description"].'</label>';
+					$html.='<select class="form-control" id="'.$field["name"].'" name="'.$field["name"].'">';
+					foreach($field["values"] as $key => $value){
+						if(isset($this->parameters[$field["name"]]) && $this->parameters[$field["name"]]==$key){
+							$html.='<option value="'.$key.'" selected>'.$value.'</option>';
+						}else{
+							$html.='<option value="'.$key.'">'.$value.'</option>';
+						}
 					}
-				}
-				$html.='</select></div>';
-			}else{
-				$input="";
-				if(isset($this->parameters[$field["name"]])){
-					$input=' value="'.$this->parameters[$field["name"]].'"';
-				}
-				$html.='<div class="form-group"><label for="'.$field["name"].'">'.$field["description"].'</label>';
-				$html.='<input type="text" class="form-control" id="'.$field["name"].'" name="'.$field["name"].'"'.$input.'>';
-				$html.='</div>';
+					$html.='</select></div>';
+				break;
+				case "matrix":
+					if(is_array($this->parameters[$field["name"]])){
+						$rows = 0;
+						$cols = 0;
+						$data =[];
+						foreach($this->parameters[$field["name"]] as $i => $row){
+							foreach($row as $j => $cell){
+								$rows=$i;
+								$cols=$j;
+								$data[]=$cell;
+							}
+						}
+						$rows++;
+						$cols++;
+						$this->parameters[$field["name"]]=$rows.";".$cols.";".implode(",", $data);
+					}
+					
+					$html.='<div data-name="'.$field["name"].'" class="matrix-input" data-init="'.$this->parameters[$field["name"]].'"></div>';
+				break;
+				default: 
+					$input="";
+					if(isset($this->parameters[$field["name"]])){
+						$input=' value="'.$this->parameters[$field["name"]].'"';
+					}
+					$html.='<div class="form-group"><label for="'.$field["name"].'">'.$field["description"].'</label>';
+					$html.='<input type="text" class="form-control" id="'.$field["name"].'" name="'.$field["name"].'"'.$input.'>';
+					$html.='</div>';
+				break;
 			}
-			
 		}		
 		$html.='<button class="btn btn-primary btn-block">Berechnen</button>';
 		$html.='</form>';

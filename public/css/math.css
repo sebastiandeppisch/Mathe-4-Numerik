@@ -47,3 +47,16 @@
 .systemoflinearequations td{
 	padding: 10px;
 }
+
+.matrix-input-field{
+	width: 50px;
+	margin:5px;
+}
+
+.matrix{
+	display: flex;
+}
+
+.matrix td{
+	padding: 10px;
+}

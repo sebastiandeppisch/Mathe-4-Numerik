@@ -10,7 +10,8 @@ class MainController{
 		"FunctionExampleController" => "Funktionsauswertung Beispiel",
 		"LagrangeController" => "Lagrange Interpolation",
 		"NewtonController" => "Newton Interpolation",
-		"CubicSplinesController" => "Kubische Splines Interpolation"
+		"CubicSplinesController" => "Kubische Splines Interpolation",
+		"MatrixController" => "Matrix"
 	];
 
 	public function __construct($controller){
