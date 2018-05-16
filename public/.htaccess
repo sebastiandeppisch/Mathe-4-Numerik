@@ -4,7 +4,6 @@ Options -Indexes
     Options -MultiViews
 
     RewriteEngine On
-    RewriteBase /bitbucket/mathe4numerik/public/
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
