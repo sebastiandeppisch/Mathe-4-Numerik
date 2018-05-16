@@ -76,12 +76,41 @@ class ButcherTable{
 		}
 		for($i=1;$i<=$this->n;$i++){
 			for($j=1;$j<=$this->n;$j++){
-				$sum2=$sum2->add($this->getBeta($i)->copy()->mul($this->getGamma($i))->mul($this->getAlpha($i, $j)->copy()));
+				$sum2=$sum2->add($this->getBeta($i)->copy()->mul($this->getAlpha($i, $j)->copy()->mul($this->getGamma($j))->copy()));
 			}
 		}
-		var_dump($sum2);
 		if(new RationalNumber(1, 3)== $sum1 && new RationalNumber(1, 6) == $sum2){
 			$consistency = 3;
+		}
+
+		$sum1 = new RationalNumber(0);
+		$sum2 = new RationalNumber(0);
+		$sum3 = new RationalNumber(0);
+		$sum4 = new RationalNumber(0);
+
+		for($i=1;$i<=$this->n;$i++){
+			$sum1=$sum1->add($this->getBeta($i)->copy()->mul($this->getGamma($i))->mul($this->getGamma($i))->mul($this->getGamma($i)));
+		}
+		for($i=1;$i<=$this->n;$i++){
+			for($j=1;$j<=$this->n;$j++){
+				$sum2=$sum2->add($this->getBeta($i)->copy()->mul($this->getAlpha($i, $j)->copy()->mul($this->getGamma($j))->copy()->mul($this->getGamma($i))->copy()));
+			}
+		}
+		for($i=1;$i<=$this->n;$i++){
+			for($j=1;$j<=$this->n;$j++){
+				$sum3=$sum3->add($this->getBeta($i)->copy()->mul($this->getGamma($j))->mul($this->getGamma($j))->mul($this->getAlpha($i, $j)->copy()));
+			}
+		}
+		for($i=1;$i<=$this->n;$i++){
+			for($j=1;$j<=$this->n;$j++){
+				for($k=1;$k<=$this->n;$k++){
+					$sum4=$sum4->add($this->getBeta($i)->copy()->mul($this->getAlpha($i, $j)->copy())->mul($this->getAlpha($j, $k)->copy())->mul($this->getGamma($k)->copy()));
+				}
+			}
+		}
+
+		if(new RationalNumber(1, 4)== $sum1 && new RationalNumber(1, 8) == $sum2 && new RationalNumber(1, 12)== $sum3 && new RationalNumber(1, 24) == $sum4){
+			$consistency = 4;
 		}
 
 
