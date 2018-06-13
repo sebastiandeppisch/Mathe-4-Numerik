@@ -17,7 +17,7 @@ class TwoDimensionalTestSeries{
 	}
 
 	public function getX(){
-		return $this->y;
+		return $this->x;
 	}
 
 	public function getY(){
@@ -82,11 +82,35 @@ class TwoDimensionalTestSeries{
 	}
 
 	public function getEmpirischeKovarianz():Number{
-		
+		$aX = $this->getArithmeticalAverageX();
+		$aY = $this->getArithmeticalAverageY();
+		$n=$this->getN();
+		$sum = new RationalNumber(0);
+		for($i=1;$i<=$n;$i++){
+			$x = $this->getXi($i)->copy()->add($aX->negate());
+			$y = $this->getYi($i)->copy()->add($aY->negate());
+			$p =$x->mul($y);
+			$sum = $sum->add($p);
+		}
+		return $sum->mul(new RationalNumber(1, $n-1));
 	}
 
 	public function getEmpirischerKorrelationskoeffizient():Number{
-		
+		$sx = $this->getEmpirischeStreuungX();
+		$sy = $this->getEmpirischeStreuungY();
+		$sxy = $this->getEmpirischeKovarianz()->toFloat();
+
+		return $sxy->mul($sx->mul($sy)->reciprocal());
+	}
+
+	public function getRegressionsGeradeA(){
+		$a = $this->getEmpirischeKovarianz();
+		return $a->mul($this->getEmpiricalVarianceX()->reciprocal());
+	}
+
+	public function getRegressionsGeradeB(){
+		$ax = $this->getRegressionsGeradeA()->mul($this->getArithmeticalAverageX());
+		return $this->getArithmeticalAverageY()->add($ax->negate());
 	}
 
 }

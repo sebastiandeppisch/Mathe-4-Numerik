@@ -11,7 +11,10 @@ class RationalNumber extends Number{
 		$this->setQ($q);
 	}
 
-	public function add($rhs){
+	public function add(Number $rhs):Number{
+		if($rhs instanceof FloatNumber){
+			return $this->toFloat()->add($rhs);
+		}
 		$lcm = $this->lcm($this->getQ(), $rhs->getQ());
 		$this->setP($this->getP()*($lcm/$this->getQ()) + $rhs->getP()*($lcm / $rhs->getQ()));
 		$this->setQ($lcm);
@@ -19,7 +22,10 @@ class RationalNumber extends Number{
 		return $this;
 	}
 
-	public function mul(RationalNumber $rhs):RationalNumber{
+	public function mul(Number $rhs):Number{
+		if($rhs instanceof FloatNumber){
+			return $this->toFloat()->mul($rhs);
+		}
 		$this->setP($this->getP()*$rhs->getP());
 		$this->setQ($this->getQ()*$rhs->getQ());
 		$this->reduce();

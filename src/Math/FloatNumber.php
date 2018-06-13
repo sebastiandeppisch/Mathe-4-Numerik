@@ -13,7 +13,10 @@ class FloatNumber extends Number{
 		return $this;
 	}
 
-	public function mul(FloatNumber $rhs):FloatNumber{
+	public function mul(Number $rhs):FloatNumber{
+		if(! $rhs instanceof FloatNumber){
+			$rhs = $rhs->toFloat();
+		}
 		$this->setF($this->getF()*$rhs->getF());
 		return $this;
 	}
