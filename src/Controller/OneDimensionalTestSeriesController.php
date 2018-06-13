@@ -19,7 +19,18 @@ class OneDimensionalTestSeriesController extends Controller{
 	}
 
 	public function getOutputHTML(){
-		$html = $this->matrix->toHTML();
+		$s = $this->testSeries;
+		$html = "<ul>";
+		$html.=sprintf("<li>Arithmetisches Mittel: %s Float: %f</li>", $s->getArithmeticalAverage()->toHTML(), $s->getArithmeticalAverage()->evaluate());
+		$html.=sprintf("<li>Median: %s Float: %f</li>", $s->getMedian()->toHTML(), $s->getMedian()->evaluate());
+		$html.=sprintf("<li>0.25 Quantil: %s Float: %f</li>", $s->getPQuantil(0.25)->toHTML(), $s->getPQuantil(0.35)->evaluate());
+		$html.=sprintf("<li>0.72 Quantil: %s Float: %f</li>", $s->getPQuantil(0.75)->toHTML(), $s->getMedian(0.75)->evaluate());
+		$html.=sprintf("<li>0.1 gestutztes Mittel: %s Float: %f</li>", $s->getAlphaGestutztesMittel(0.1)->toHTML(), $s->getAlphaGestutztesMittel(0.1)->evaluate());
+		$html.=sprintf("<li>Empirische Varianz %s Float: %f</li>", $s->getEmpiricalVariance()->toHTML(), $s->getEmpiricalVariance()->evaluate());
+		$html.=sprintf("<li>Empirische Streuung: %s </li>", $s->getEmpirischeStreuung()->toHTML());
+		$html.=sprintf("<li>Spanweite %s Float: %f</li>", $s->getRange()->toHTML(), $s->getRange()->evaluate());
+		$html.=sprintf("<li>Quartilabstand %s Float: %f</li>", $s->getInterQuartileRange()->toHTML(), $s->getInterQuartileRange()->evaluate());
+		$html.="</ul>";
 		return $html;
 	}
 }
