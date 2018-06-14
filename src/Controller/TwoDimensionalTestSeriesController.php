@@ -40,18 +40,54 @@ class TwoDimensionalTestSeriesController extends Controller{
 		$html.=sprintf("<li>Empirische Kovarianz s_xy: %s </li>", $s->getEmpirischeKovarianz()->toHTML());
 
 		$html.=sprintf("<li>Empirischer Korrelationskoeffizient: %s </li>", $s->getEmpirischerKorrelationskoeffizient()->toHTML());
+
+		$html.=sprintf("<li>Regressionsgerade: y=%sx+%s </li>", $s->getRegressionsGeradeA()->toHTML(), $s->getRegressionsGeradeB()->toHTML());
 		$html.="</ul>";
 		return $html;
 	}
 
 	public function getChart(){
-		$charts=[];
-
+		/*$charts=[];
+		//https://github.com/kevinkhill/lavacharts/blob/3.0/tests/Examples/Charts/ComboChart.php
 		$regression= new ChartController("Regressionsgerade");
 		$regression->addChart(new MFunction("5x+7"), "Gerade");
 		//$regression->setType("ScatterChart");
 		$charts[]=$regression;
-		return $charts;
+		return $charts;*/
+
+		$lava = new \Khill\Lavacharts\Lavacharts;
+
+		$finances = $lava->DataTable();
+		$finances->addNumberColumn('Y')
+				->addNumberColumn('Punkte')
+				->addNumberColumn('Regressionsgerade');
+			for($i=1;$i<=$this->testSeries->getN();$i++){
+				$x = $this->testSeries->getXi($i)->evaluate();
+				$y = $this->testSeries->getYi($i)->evaluate();
+
+				$a = $this->testSeries->getRegressionsGeradeA()->evaluate();
+				$b = $this->testSeries->getRegressionsGeradeB()->evaluate();
+
+				$finances->addRow([$x, $y, $a*$x+$b]);
+			}
+		$lava->ComboChart('Finances', $finances, [
+			'title' => 'Regression',
+			'titleTextStyle' => [
+				'color' => 'rgb(123, 65, 89)',
+				'fontSize' => 16,
+				'bold' => true
+			],
+			'legend' => [
+				'position' => 'in'
+			],
+			'seriesType' => 'line',
+			'series' => [
+				1 => [
+					'type' => 'line'
+				]
+			]
+		]);
+		return '<div id="finances-div" style="height:500px"></div>'.$lava->render('ComboChart', 'Finances', 'finances-div');
 		/*
 		$splines = $this->getSplines();
 		$chart = new ChartController("Kubische Splines");

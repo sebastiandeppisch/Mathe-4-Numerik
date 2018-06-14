@@ -64,6 +64,9 @@ class MainController{
 				}
 				return $html;
 			}else{
+				if(is_string($this->controller->getChart())){
+					return $this->controller->getChart();
+				}
 				return $this->controller->getChart()->getHTML();
 			}
 			
