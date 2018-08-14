@@ -129,6 +129,9 @@ class RationalNumber extends Number{
 	}
 
 	static public function fromString($number){
+		if($number instanceof RationalNumber){
+			return $number;
+		}
 		$number = explode("/", $number);
 		$p = (int)$number[0];
 		if(isset($number[1])){
