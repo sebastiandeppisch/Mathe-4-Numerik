@@ -77,7 +77,7 @@ class ButcherTableTest extends Testcase{
     }*/
 
     public function testConsistency(){
-      /*  $b = ButcherTable::fromArray(ButcherTableTest::expliciteEuler);
+        $b = ButcherTable::fromArray(ButcherTableTest::expliciteEuler);
         $this->assertEquals(1, $b->getConistency());
 
         $b = ButcherTable::fromArray(ButcherTableTest::impliciteEuler);
@@ -98,13 +98,13 @@ class ButcherTableTest extends Testcase{
         $this->assertEquals(3, $consistency);
 
         $b = ButcherTable::fromArray(ButcherTableTest::heun3);
-        $this->assertEquals(3, $b->getConistency());*/
+        $this->assertEquals(3, $b->getConistency());
 
         $b = ButcherTable::fromArray(ButcherTableTest::rungeKutta4);
         $this->assertEquals(4, $b->getConistency());
     }
 
     public function testImplicite(){
-
+        
     }
 }

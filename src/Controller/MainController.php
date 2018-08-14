@@ -11,6 +11,7 @@ class MainController{
 		"LagrangeController" => "Lagrange Interpolation",
 		"NewtonController" => "Newton Interpolation",
 		"CubicSplinesController" => "Kubische Splines Interpolation",
+		"ButcherTableController" => "Butcher Tableu",
 		"MatrixController" => "Matrix",
 		"OneDimensionalTestSeriesController" => "1D Messreihe",
 		"TwoDimensionalTestSeriesController" => "2D Messreihe"

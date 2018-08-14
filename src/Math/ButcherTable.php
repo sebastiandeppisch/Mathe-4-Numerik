@@ -132,4 +132,49 @@ class ButcherTable{
 
 		}
 	}
+
+	public function toHTML(){
+		$alpha  = new Matrix(count($this->alphas), count($this->alphas));
+		$alpha->setArray($this->alphas);
+		$beta =  new Matrix(1, count($this->betas));
+		$beta->setArray([$this->betas]);
+
+		$gammas = [];
+		foreach($this->gammas as $gamma){
+			$gammas[]=[$gamma];
+		}
+		$gamma = new Matrix(count($this->gammas), 1);
+		$gamma->setArray($gammas);
+		$html = '<table>
+			<tr>
+				<td style="border-right: 1px solid black;border-bottom: 1px solid black;">'.$gamma->toHTML().'</td>
+				<td style="border-bottom: 1px solid black;">'.$alpha->toHTML().'</td>
+			</tr>
+			<tr>
+				<td style="border-right: 1px solid black;"></td>
+				<td>'.$beta->toHTML().'</td>
+			</tr></table><hr>';
+
+		$html.="Konsistenzordnung: ".$this->getConistency()."<br>k für explizit:<br>";
+		for($i=1;$i<=count($this->alphas);$i++){
+			$html.="k<sub>".$i."</sub> = f(";
+			$html.="t+".$this->getGamma($i)->toHTML()."h, ";
+			$html.="u + h(";
+			$temp= [];
+			for($j=1;$j<=$i-1;$j++){
+				$temp[]=$this->getAlpha($i, $j)->toHTML()."k<sub>".$j."</sub>";
+			}
+			$html.=implode("+", $temp);
+			$html.=")";
+
+			$html.=")<br>";
+		}
+		$html.="phi(t,h;u)=";
+		$temp =[];
+		for($i=1;$i<=count($this->betas);$i++){
+			$temp[]=$this->getBeta($i)->toHTML()."k<sub>".$i."</sub>";
+		}
+		$html.=implode("+", $temp);
+		return $html;
+	}
 }
