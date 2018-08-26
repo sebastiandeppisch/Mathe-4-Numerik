@@ -13,6 +13,7 @@ class MainController{
 		"CubicSplinesController" => "Kubische Splines Interpolation",
 		"ButcherTableController" => "Butcher Tableu",
 		"MatrixController" => "Matrix",
+		"CholeskyDecompositionController" => "Cholesky Zerlegung",
 		"OneDimensionalTestSeriesController" => "1D Messreihe",
 		"TwoDimensionalTestSeriesController" => "2D Messreihe"
 	];
@@ -37,7 +38,12 @@ class MainController{
 
 	public function getOutputHTML(){
 		if($this->controller !== NULL){
-			return $this->controller->getOutputHTML();
+			try{
+				$html =  $this->controller->getOutputHTML();
+			}catch(\Exception $e){
+				$html= "Es ist ein Fehler aufgetreten:<br>".get_class($e)."<br>".$e->getMessage();
+			}
+			return $html;
 		}
 	}
 
