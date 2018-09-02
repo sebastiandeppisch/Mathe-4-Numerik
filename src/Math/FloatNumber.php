@@ -1,7 +1,8 @@
 <?php
 namespace Math;
 
-use Exception\DivisionNullException;
+use Math\Exception\DivisionNullException;
+
 class FloatNumber extends Number{
 	private $f;
 	public function __construct(float $f){
@@ -55,6 +56,9 @@ class FloatNumber extends Number{
 	}
 
 	public function reciprocal(){
+		if($this->getF() === 0.0){
+			throw new DivisionNullException();
+		}
 		return new FloatNumber(1/$this->getF());
 	}
 
