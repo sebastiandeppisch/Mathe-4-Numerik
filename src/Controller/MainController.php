@@ -14,7 +14,8 @@ class MainController{
 		"ButcherTableController" => "Butcher Tableu",
 		"MatrixController" => "Matrix",
 		"OneDimensionalTestSeriesController" => "1D Messreihe",
-		"TwoDimensionalTestSeriesController" => "2D Messreihe"
+		"TwoDimensionalTestSeriesController" => "2D Messreihe",
+		"GaussAlgorithmController" => "Gauss Algorithmus"
 	];
 
 	public function __construct($controller){

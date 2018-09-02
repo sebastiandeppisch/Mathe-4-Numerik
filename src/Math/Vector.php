@@ -30,7 +30,7 @@ class Vector{
         if(is_int($number)){
             return new RationalNumber($number);
         }
-        throw new \Excpetion($number." is not a correct number");
+        throw new \Exception($number." is not a correct number");
     }
 
     public function get(int $i):Number{
@@ -45,6 +45,12 @@ class Vector{
         for($i=0;$i<$this->rows;$i++){
             $this->set($i, $newData[$i]);
         }
+    }
+
+    public function fromArray(array $newData):Vector{
+        $vector = new Vector(count($newData));
+        $vector->setArray($newData);
+        return $vector;
     }
 
     public function getArray(){
@@ -115,4 +121,18 @@ class Vector{
         }
         return $m;
     }
+
+    public function toHTML(){
+		$html = '<div class="vector">';
+		$html.='<div class="fontMaxSize"></div>';
+		$html .= "<table><tbody>";
+		for($i=0;$i<$this->getNRows();$i++){
+			$html.="<tr>";
+            $html.="<td>".$this->get($i)->toHTML()."</td>";
+			$html.="</tr>";
+		}
+		$html .="</tbody></table>";
+		$html .="</div>";
+		return $html;
+	}
 }
