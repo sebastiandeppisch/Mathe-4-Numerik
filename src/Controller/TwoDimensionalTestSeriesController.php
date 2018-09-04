@@ -27,22 +27,22 @@ class TwoDimensionalTestSeriesController extends Controller{
 
 	public function getOutputHTML(){
 		$s = $this->testSeries;
-		$html = "<ul>";
-		$html.=sprintf("<li>Arithmetisches Mittel x : %s Float: %f</li>", $s->getArithmeticalAverageX()->toHTML(), $s->getArithmeticalAverageX()->evaluate());
-		$html.=sprintf("<li>Arithmetisches Mittel y : %s Float: %f</li>", $s->getArithmeticalAverageY()->toHTML(), $s->getArithmeticalAverageY()->evaluate());
+		$html = '<table class="table"><thead><tr><th>Wert</th><th>Formelzeichen</th><th>Rational</th><th>Reell</th></tr></thead><tbody>';
+		$html.=sprintf("<tr><td>Arithmetisches Mittel x</td><td></td><td>%s</td><td>%s</td></tr>", $s->getArithmeticalAverageX()->toHTML(), $s->getArithmeticalAverageX()->toFloat()->toHTML());
+		$html.=sprintf("<tr><td>Arithmetisches Mittel y</td><td></td><td>%s</td><td>%s</td></tr>", $s->getArithmeticalAverageY()->toHTML(), $s->getArithmeticalAverageY()->toFloat()->toHTML());
 
-		$html.=sprintf("<li>Empirische Varianz X %s Float: %f</li>", $s->getEmpiricalVarianceX()->toHTML(), $s->getEmpiricalVarianceX()->evaluate());
-		$html.=sprintf("<li>Empirische Varianz Y %s Float: %f</li>", $s->getEmpiricalVarianceY()->toHTML(), $s->getEmpiricalVarianceY()->evaluate());
+		$html.=sprintf("<tr><td>Empirische Varianz X</td><td></td><td>%s</td><td>%s</td></tr>", $s->getEmpiricalVarianceX()->toHTML(), $s->getEmpiricalVarianceX()->toFloat()->toHTML());
+		$html.=sprintf("<tr><td>Empirische Varianz Y</td><td></td><td>%s</td><td>%s</td></tr>", $s->getEmpiricalVarianceY()->toHTML(), $s->getEmpiricalVarianceY()->toFloat()->toHTML());
 
-		$html.=sprintf("<li>Empirische Streuung X: %s </li>", $s->getEmpirischeStreuungX()->toHTML());
-		$html.=sprintf("<li>Empirische Streuung Y: %s </li>", $s->getEmpirischeStreuungY()->toHTML());
+		$html.=sprintf("<tr><td>Empirische Streuung X</td><td></td><td>...</td><td>%s</td></tr>", $s->getEmpirischeStreuungX()->toHTML());
+		$html.=sprintf("<tr><td>Empirische Streuung Y</td><td></td><td>...</td><td>%s</td></tr>", $s->getEmpirischeStreuungY()->toHTML());
 
-		$html.=sprintf("<li>Empirische Kovarianz s_xy: %s </li>", $s->getEmpirischeKovarianz()->toHTML());
+		$html.=sprintf("<tr><td>Empirische Kovarianz s_xy</td><td></td><td>%s</td><td>%s</td></tr>", $s->getEmpirischeKovarianz()->toHTML(), $s->getEmpirischeKovarianz()->toFloat()->toHTML());
 
-		$html.=sprintf("<li>Empirischer Korrelationskoeffizient: %s </li>", $s->getEmpirischerKorrelationskoeffizient()->toHTML());
+		$html.=sprintf("<tr><td>Empirischer Korrelationskoeffizient</td><td></td><td>...</td><td>%s</td></tr>", $s->getEmpirischerKorrelationskoeffizient()->toHTML());
 
-		$html.=sprintf("<li>Regressionsgerade: y=%sx+%s </li>", $s->getRegressionsGeradeA()->toHTML(), $s->getRegressionsGeradeB()->toHTML());
-		$html.="</ul>";
+		$html.=sprintf("<tr><td>Regressionsgerade:</td><td></td><td>%s</td><td>%s</td></tr>", $s->getRegression()->toHTML(), $s->getRegression()->toFloat()->toHTML());
+		$html.='</tbody></table>';
 		return $html;
 	}
 

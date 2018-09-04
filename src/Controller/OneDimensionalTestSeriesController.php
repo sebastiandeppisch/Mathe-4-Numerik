@@ -20,17 +20,17 @@ class OneDimensionalTestSeriesController extends Controller{
 
 	public function getOutputHTML(){
 		$s = $this->testSeries;
-		$html = "<ul>";
-		$html.=sprintf("<li>Arithmetisches Mittel: %s Float: %f</li>", $s->getArithmeticalAverage()->toHTML(), $s->getArithmeticalAverage()->evaluate());
-		$html.=sprintf("<li>Median: %s Float: %f</li>", $s->getMedian()->toHTML(), $s->getMedian()->evaluate());
-		$html.=sprintf("<li>0.25 Quantil: %s Float: %f</li>", $s->getPQuantil(0.25)->toHTML(), $s->getPQuantil(0.35)->evaluate());
-		$html.=sprintf("<li>0.72 Quantil: %s Float: %f</li>", $s->getPQuantil(0.75)->toHTML(), $s->getMedian(0.75)->evaluate());
-		$html.=sprintf("<li>0.1 gestutztes Mittel: %s Float: %f</li>", $s->getAlphaGestutztesMittel(0.1)->toHTML(), $s->getAlphaGestutztesMittel(0.1)->evaluate());
-		$html.=sprintf("<li>Empirische Varianz %s Float: %f</li>", $s->getEmpiricalVariance()->toHTML(), $s->getEmpiricalVariance()->evaluate());
-		$html.=sprintf("<li>Empirische Streuung: %s </li>", $s->getEmpirischeStreuung()->toHTML());
-		$html.=sprintf("<li>Spanweite %s Float: %f</li>", $s->getRange()->toHTML(), $s->getRange()->evaluate());
-		$html.=sprintf("<li>Quartilabstand %s Float: %f</li>", $s->getInterQuartileRange()->toHTML(), $s->getInterQuartileRange()->evaluate());
-		$html.="</ul>";
+		$html = '<table class="table"><thead><tr><th>Wert</th><th>Formelzeichen</th><th>Rational</th><th>Reell</th></tr></thead><tbody>';
+		$html.=sprintf("<tr><td>Arithmetisches Mittel</td><td>x̄</td><td>%s</td><td>%s</td></tr>", $s->getArithmeticalAverage()->toHTML(), $s->getArithmeticalAverage()->toFloat()->toHTML());
+		$html.=sprintf("<tr><td>Median</td><td>x̃</td><td>%s</td><td>%s</td></tr>", $s->getMedian()->toHTML(), $s->getMedian()->toFloat()->toHTML());
+		$html.=sprintf("<tr><td>0.25 Quantil</td><td>x<sub>0.25</sub></td><td>%s</td><td>%s</td></tr>", $s->getPQuantil(0.25)->toHTML(), $s->getPQuantil(0.35)->toFloat()->toHTML());
+		$html.=sprintf("<tr><td>0.72 Quantil</td><td>x<sub>0.75</sub></td><td>%s</td><td>%s</td></tr>", $s->getPQuantil(0.75)->toHTML(), $s->getMedian(0.75)->toFloat()->toHTML());
+		$html.=sprintf("<tr><td>0.1 gestutztes Mittel</td><td></td><td>%s</td><td>%s</td></tr>", $s->getAlphaGestutztesMittel(0.1)->toHTML(), $s->getAlphaGestutztesMittel(0.1)->toFloat()->toHTML());
+		$html.=sprintf("<tr><td>Empirische Varianz</td><td>s<sup>2</sup></td><td>%s</td><td>%s</td></tr>", $s->getEmpiricalVariance()->toHTML(), $s->getEmpiricalVariance()->toFloat()->toHTML());
+		$html.=sprintf("<tr><td>Empirische Streuung</td><td>s</td><td>...</td><td>%s</td></tr>", $s->getEmpirischeStreuung()->toHTML());
+		$html.=sprintf("<tr><td>Spanweite</td><td>v</td><td>%s</td><td>%s</td></tr>", $s->getRange()->toHTML(), $s->getRange()->toFloat()->toHTML());
+		$html.=sprintf("<tr><td>Quartilabstand</td></td><td>q</td><td>%s</td><td>%s</td></tr>", $s->getInterQuartileRange()->toHTML(), $s->getInterQuartileRange()->toFloat()->toHTML());
+		$html.='</tbody></table>';
 		return $html;
 	}
 }

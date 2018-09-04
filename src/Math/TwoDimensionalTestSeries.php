@@ -99,4 +99,11 @@ class TwoDimensionalTestSeries{
 		return $this->getArithmeticalAverageY()->add($ax->negate());
 	}
 
+	public function getRegression():Polynomial{
+		$polynom = new Polynomial();
+		$polynom->addSummand(PolynomialSummand::new($this->getRegressionsGeradeA(), 1));
+		$polynom->addSummand(PolynomialSummand::new($this->getRegressionsGeradeB(), 0));
+		return $polynom;
+	}
+
 }
