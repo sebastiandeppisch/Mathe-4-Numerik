@@ -15,7 +15,8 @@ class MainController{
 		"MatrixController" => "Matrix",
 		"CholeskyDecompositionController" => "Cholesky Zerlegung",
 		"OneDimensionalTestSeriesController" => "1D Messreihe",
-		"TwoDimensionalTestSeriesController" => "2D Messreihe"
+		"TwoDimensionalTestSeriesController" => "2D Messreihe",
+		"GaussAlgorithmController" => "Gauss Algorithmus"
 	];
 
 	public function __construct($controller){

@@ -44,4 +44,10 @@ abstract class Number{
 		}
 		return $this->addRational($rhs);
 	}
+	
+	abstract public function copy();
+
+	public function __clone(){
+		return $this->copy();
+	}
 }

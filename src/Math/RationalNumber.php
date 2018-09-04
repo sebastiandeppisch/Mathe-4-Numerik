@@ -143,4 +143,8 @@ class RationalNumber extends Number{
 	public function negate(){
 		return new RationalNumber(-1*$this->getP(), $this->getQ());
 	}
+
+	public function __toString(){
+		return $this->toString();
+	}
 }

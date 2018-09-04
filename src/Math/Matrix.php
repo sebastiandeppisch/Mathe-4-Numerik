@@ -122,7 +122,34 @@ class Matrix{
         }
     }
 
-    public function toHTML(){
+	public static function fromArray(array $newData):Matrix{
+		$rows = count($newData);
+		$cols = null;
+		foreach($newData as $data){
+			if($cols === null){
+				$cols=count($data);
+			}elseif($cols != count($data)){
+				throw new Exception("Array not wellformed!");
+			}
+		}
+		$matrix = new Matrix($rows, $cols);
+		$matrix->setArray($newData);
+		return $matrix;
+	}
+
+	public function setIdentity(){
+		for($i=0;$i<$this->rows;$i++){
+			for($j=0;$j<$this->cols;$j++){
+				if($j===$i){
+					$this->set($i, $j, new RationalNumber(1));
+				}else{
+					$this->set($i, $j, new RationalNumber(0));
+				}
+			}
+		}
+	}
+
+	public function toHTML(){
 		$html = '<div class="matrix">';
 		$html.='<div class="fontMaxSize"></div>';
 		$html .= "<table><tbody>";
@@ -146,4 +173,23 @@ class Matrix{
         }
         return $this;
     }
+
+	public function __toString(): string {
+		$result = "";
+		$cols = [];
+		for($i=0;$i<$this->getNRows();$i++){
+			$cols[] = implode("\t", array_map(function($number){
+					return $number->toString();
+			}, $this->data[$i]));
+		}
+		return "\n".implode("\n", $cols)."\n";
+	}
+
+	public function __clone(){
+		for($i=0;$i<$this->getNRows();$i++){
+			for($j=0;$j<$this->getNCols();$j++){
+				$this->data[$i][$j]=clone $this->data[$i][$j];
+			}
+		}
+	}
 }

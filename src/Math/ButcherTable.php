@@ -169,7 +169,7 @@ class ButcherTable{
 
 			$html.=")<br>";
 		}
-		$html.="phi(t,h;u)=";
+		$html.="Φ(t,h;u)=";
 		$temp =[];
 		for($i=1;$i<=count($this->betas);$i++){
 			$temp[]=$this->getBeta($i)->toHTML()."k<sub>".$i."</sub>";

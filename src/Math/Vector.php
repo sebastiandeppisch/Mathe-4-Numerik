@@ -34,6 +34,12 @@ class Vector{
         }
     }
 
+    public function fromArray(array $newData):Vector{
+        $vector = new Vector(count($newData));
+        $vector->setArray($newData);
+        return $vector;
+    }
+
     public function getArray(){
         return $this->data;
     }
@@ -102,4 +108,18 @@ class Vector{
         }
         return $m;
     }
+
+    public function toHTML(){
+		$html = '<div class="vector">';
+		$html.='<div class="fontMaxSize"></div>';
+		$html .= "<table><tbody>";
+		for($i=0;$i<$this->getNRows();$i++){
+			$html.="<tr>";
+            $html.="<td>".$this->get($i)->toHTML()."</td>";
+			$html.="</tr>";
+		}
+		$html .="</tbody></table>";
+		$html .="</div>";
+		return $html;
+	}
 }
