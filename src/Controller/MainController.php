@@ -6,22 +6,25 @@ class MainController{
 	private $controller=NULL;
 
 	private static $menu=[
+		"text-examples" => "Eingabe - Beispiele:",
 		"PolynomExampleController" => "Polynom Formattierungs Beispiel",
 		"FunctionExampleController" => "Funktionsauswertung Beispiel",
+		"MatrixController" => "Matrix",
+		"text-numeric" => "Numerik:",
 		"LagrangeController" => "Lagrange Interpolation",
 		"NewtonController" => "Newton Interpolation",
 		"CubicSplinesController" => "Kubische Splines Interpolation",
 		"ButcherTableController" => "Butcher Tableu",
-		"MatrixController" => "Matrix",
 		"CholeskyDecompositionController" => "Cholesky Zerlegung",
+		"GaussAlgorithmController" => "Gauss Algorithmus",
+		"text-stochastic" => "Stochastik:",
 		"OneDimensionalTestSeriesController" => "1D Messreihe",
 		"TwoDimensionalTestSeriesController" => "2D Messreihe",
-		"GaussAlgorithmController" => "Gauss Algorithmus"
 	];
 
 	public function __construct($controller){
 		if($controller !== NULL){
-			if(in_array($controller, array_keys(self::$menu))){
+			if(strpos($controller, 'Controller') !== false && in_array($controller, array_keys(self::$menu))){
 				$test = new PolynomExampleController();
 				$this->currentActive=$controller;
 				$controller="\Controller\\".$controller;
@@ -52,7 +55,11 @@ class MainController{
 		$html = '<ul class="nav nav-sidebar">';
 
 		foreach(self::$menu as $controller => $label){
-			$html.='<li '.(($controller === $this->currentActive)?' class="active"':'').'><a href="'.$controller.'">'.$label.'</a></li>';
+			if(strpos($controller, 'Controller') === false){
+				$html.='<li class="disabled"><a href="#">'.$label.'</a></li>';
+			}else{
+				$html.='<li '.(($controller === $this->currentActive)?' class="active"':'').'><a href="'.$controller.'">'.$label.'</a></li>';
+			}
 		}
 
 		$html.= '</ul>';
@@ -79,5 +86,6 @@ class MainController{
 			}
 			
 		}
+		return NULL;
 	}
 }

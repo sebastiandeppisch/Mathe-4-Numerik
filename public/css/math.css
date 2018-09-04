@@ -9,12 +9,15 @@
 }
 
 .rationalnumber{
+	vertical-align: middle;
 	display: inline-block;
 	color:green;
 }
 
 .floatnumber{
 	color:red;
+	vertical-align: middle;
+	display: inline-block;
 }
 
 .polnomialsummand-outer{
