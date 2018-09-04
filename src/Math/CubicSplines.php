@@ -127,32 +127,32 @@ abstract class CubicSplines{
 		}
 		$s = new Polynomial();
 		$xi1 = new Polynomial();
-		$xi1->addSummand(new RPolynomialSummand($this->getX($i+1), 0)); //x_(i+1)
-		$xi1->addSummand(new RPolynomialSummand(new RationalNumber(-1, 1), 1)); // -x
+		$xi1->addSummand(PolynomialSummand::new($this->getX($i+1), 0)); //x_(i+1)
+		$xi1->addSummand(PolynomialSummand::new(new RationalNumber(-1, 1), 1)); // -x
 		$temp = $xi1->mul($xi1)->mul($xi1); // ()^3
 		$temp->divRational($this->getH($i));
 		$Mi = new Polynomial();
-		$Mi->addSummand(new \Math\RPolynomialSummand($this->getM($i), 0));
+		$Mi->addSummand(PolynomialSummand::new($this->getM($i), 0));
 		$temp = $temp->mul($Mi);
 		$s->add($temp);
 
 		$xi = new Polynomial();
-		$xi->addSummand(new RPolynomialSummand($this->getX($i)->negate(), 0)); //x_(i)
-		$xi->addSummand(new RPolynomialSummand(new RationalNumber(1, 1), 1)); // x
+		$xi->addSummand(PolynomialSummand::new($this->getX($i)->negate(), 0)); //x_(i)
+		$xi->addSummand(PolynomialSummand::new(new RationalNumber(1, 1), 1)); // x
 		$temp = $xi->mul($xi)->mul($xi);
 		$temp->divRational($this->getH($i));
 		$Mi1 = new Polynomial();
-		$Mi1->addSummand(new \Math\RPolynomialSummand($this->getM($i+1), 0));
+		$Mi1->addSummand(PolynomialSummand::new($this->getM($i+1), 0));
 		$temp = $temp->mul($Mi1);
 		$s->add($temp);
 
 		$sixth = new Polynomial();
-		$sixth->addSummand(new RPolynomialSummand(new RationalNumber(1, 6), 0));
+		$sixth->addSummand(PolynomialSummand::new(new RationalNumber(1, 6), 0));
 		$s = $s->mul($sixth);
 		
-		$s->addSummand(new RPolynomialSummand($this->getC($i), 1));
-		$s->addSummand(new RPolynomialSummand($this->getC($i)->mul($this->getX($i)->negate()), 0));
-		$s->addSummand(new RPolynomialSummand($this->getD($i), 0));
+		$s->addSummand(PolynomialSummand::new($this->getC($i), 1));
+		$s->addSummand(PolynomialSummand::new($this->getC($i)->mul($this->getX($i)->negate()), 0));
+		$s->addSummand(PolynomialSummand::new($this->getD($i), 0));
 		$this->s[$i]=$s;
 		return $s;
 	}

@@ -8,7 +8,16 @@ abstract class PolynomialSummand{
 
     protected $number;
 
-    abstract public function __construct($number, $exponentiation=0, $variable="x");
+    abstract protected function __construct($number, $exponentiation=0, $variable="x");
+
+    static public function new($number, $exponentiation=0, $variable="x"){
+        $number = Number::fromString($number);
+        if($number instanceof RationalNumber){
+            return new RPolynomialSummand($number, $exponentiation, $variable);
+        }else{
+            return new FPolynomialSummand($number, $exponentiation, $variable);
+        }
+    }
 
     public function add(PolynomialSummand $rhs){
         if($rhs->getVariable() !== $this->getVariable()){

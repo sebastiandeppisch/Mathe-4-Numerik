@@ -2,7 +2,7 @@
 namespace Math;
 
 class RPolynomialSummand extends PolynomialSummand{
-    public function __construct($number, $exponentiation=0, $variable="x"){
+    protected function __construct($number, $exponentiation=0, $variable="x"){
         $this->number = Number::fromString($number);
         $this->exponentiation=$exponentiation;
         $this->variable=$variable;

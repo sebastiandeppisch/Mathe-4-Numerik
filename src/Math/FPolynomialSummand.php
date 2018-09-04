@@ -2,7 +2,7 @@
 namespace Math;
 
 class FPolynomialSummand extends PolynomialSummand{
-    public function __construct($number, $exponentiation=0, $variable="x"){
+    protected function __construct($number, $exponentiation=0, $variable="x"){
         if($number instanceof FloatNumber){
             $this->number=$number;
         }else{

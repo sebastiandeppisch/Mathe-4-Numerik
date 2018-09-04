@@ -1,15 +1,14 @@
 <?php 
 use PHPUnit\FrameWork\TestCase;
 
-use Math\RPolynomialSummand;
-use Math\FPolynomialSummand;
+use Math\PolynomialSummand;
 use Math\Polynomial;
 
 class FPolynomialSummandTest extends Testcase{
 
     public function testAdd(){
-        $a = new FPolynomialSummand(1.3);
-        $b = new FPolynomialSummand(2.5);
+        $a = PolynomialSummand::new(1.3);
+        $b = PolynomialSummand::new(2.5);
 
         $a->add($b);
         $this->assertEquals(3.8, $a->getNumber()->evaluate());
@@ -17,8 +16,8 @@ class FPolynomialSummandTest extends Testcase{
     }
 
     public function testAddZero(){
-        $a = new FPolynomialSummand(0);
-        $b = new FPolynomialSummand(0);
+        $a = PolynomialSummand::new(0);
+        $b = PolynomialSummand::new(0);
 
         $a->add($b);
         $this->assertEquals(0, $a->getNumber()->evaluate());
@@ -26,8 +25,8 @@ class FPolynomialSummandTest extends Testcase{
     }
 
     public function testAddNegative(){
-        $a = new FPolynomialSummand(10.3);
-        $b = new FPolynomialSummand(-42.5);
+        $a = PolynomialSummand::new(10.3);
+        $b = PolynomialSummand::new(-42.5);
 
         $a->add($b);
         $this->assertEquals(-32.2, $a->getNumber()->evaluate());
@@ -37,22 +36,22 @@ class FPolynomialSummandTest extends Testcase{
 
 
     public function testEvaluateWithExponentNull(){
-        $a = new FPolynomialSummand(10);
+        $a = PolynomialSummand::new(10);
         $this->assertEquals(10, $a->evaluate(1000));
         $this->assertEquals(10, $a->evaluate(0));
         $this->assertEquals(10, $a->evaluate(-1));
     }
 
     public function testEvaluateWithExponent(){
-        $a = new FPolynomialSummand(10, 2);
+        $a = PolynomialSummand::new(10, 2);
         $this->assertEquals(1102.5, $a->evaluate(10.5));
         $this->assertEquals(10, $a->evaluate(1));
         $this->assertEquals(0, $a->evaluate(0));
     }
 
     public function testMulNumber(){
-        $a = new FPolynomialSummand(7.8);
-        $b = new FPolynomialSummand(2.42);
+        $a = PolynomialSummand::new(7.8);
+        $b = PolynomialSummand::new(2.42);
 
         $a=$a->mul($b);
         $this->assertEquals(18.876, $a->getNumber()->evaluate());
@@ -60,8 +59,8 @@ class FPolynomialSummandTest extends Testcase{
     }
 
     public function testMulExponentiation(){
-        $a = new FPolynomialSummand(7, -3);
-        $b = new FPolynomialSummand(2, 8);
+        $a = PolynomialSummand::new(7, -3);
+        $b = PolynomialSummand::new(2, 8);
 
         $a=$a->mul($b);
         $this->assertEquals(14, $a->getNumber()->evaluate());
@@ -69,46 +68,49 @@ class FPolynomialSummandTest extends Testcase{
     }
 
     public function testUnCopiedCanBeChanged(){
-        $a = new FPolynomialSummand(42);
+        $a = PolynomialSummand::new(42);
         $b = $a;
-        $b->add(new FPolynomialSummand(7));
+        $b->add(PolynomialSummand::new(7));
         $this->assertEquals(49, $a->getNumber()->evaluate());
     }
 
     public function testCopiedCanNotBeChanged(){
-        $a = new FPolynomialSummand(42);
+        $a = PolynomialSummand::new(42);
         $b = $a->copy();
-        $b->add(new FPolynomialSummand(7));
+        $b->add(PolynomialSummand::new(7));
         $this->assertEquals(42, $a->getNumber()->evaluate());
         $this->assertEquals(49, $b->getNumber()->evaluate());
     }
 
     public function testToString(){
-        $s = new FPolynomialSummand(3.5, 2);
+        $s = PolynomialSummand::new(3.5, 2);
         $this->assertEquals("3.5x^2", $s->toString());
 
-        $s = new FPolynomialSummand(5, 0);
+        $s = PolynomialSummand::new(5.0, 0);
         $this->assertEquals("5.0", $s->toString());
 
-        $s = new FPolynomialSummand(-7.4, 3);
+        $s = PolynomialSummand::new(-7.4, 3);
         $this->assertEquals("-7.4x^3", $s->toString());
 
-        $s = new FPolynomialSummand(-1, 3);
+        $s = PolynomialSummand::new(-1, 3);
         $this->assertEquals("-x^3", $s->toString());
 
-        $s = new FPolynomialSummand(0, 12);
+        $s = PolynomialSummand::new(0, 12);
         $this->assertEquals("0", $s->toString());
 
-        $s = new FPolynomialSummand(1, 12);
+        $s = PolynomialSummand::new(0.0, 12);
+        $this->assertEquals("0.0", $s->toString());
+
+        $s = PolynomialSummand::new(1, 12);
         $this->assertEquals("x^12", $s->toString());
 
-        $s = new FPolynomialSummand(5, 1);
+        $s = PolynomialSummand::new(5.0, 1);
         $this->assertEquals("5.0x", $s->toString());
     }
 
     public function testAddRtoF(){
-        $a = new FPolynomialSummand(3.5, 2);
-        $b = new RPolynomialSummand(4, 2);
+        $a = PolynomialSummand::new(3.5, 2);
+        $b = PolynomialSummand::new(4, 2);
         $b = $b->toFloat();
         $a->add($b);
 
@@ -123,7 +125,7 @@ class FPolynomialSummandTest extends Testcase{
         $p->toFloat();
         $this->assertEquals("10.0x^2+3.0x^3", $p->toString());
 
-        $a = new FPolynomialSummand(3.5, 2);
+        $a = PolynomialSummand::new(3.5, 2);
         $p2 = new \Math\Polynomial();
         $p2->addSummand($a);
         $this->assertEquals("3.5x^2", $p2->toString());

@@ -29,15 +29,15 @@ abstract class Lagrange{
 		$x_j=$this->getX($j);
 		$x_i=$this->getX($i);
 		$x_jMinus=$x_j->mul(new RationalNumber(-1, 1));
-		$part->addSummand(new RPolynomialSummand(1, 1));
-		$part->addSummand(new RPolynomialSummand($x_jMinus, 0));
+		$part->addSummand(PolynomialSummand::new(1, 1));
+		$part->addSummand(PolynomialSummand::new($x_jMinus, 0));
 		$part = $part->divRational($x_i->add($x_jMinus));
 		return $part;
 	}
 
 	public function getL($i){
 		$p = new Polynomial();
-		$p->addSummand(new RPolynomialSummand(1));
+		$p->addSummand(PolynomialSummand::new(1));
 		for($j=0;$j<=$this->degree; $j++){
 			if($j !== $i){
 				$p = $p->mul($this->getLFactor($i, $j));
@@ -60,7 +60,7 @@ abstract class Lagrange{
 			$l = $this->getL($i);
 			$l = $l->toFloat();
 			$p = new Polynomial();
-			$p->addSummand(new FPolynomialSummand($this->getY($this->getX($i))));
+			$p->addSummand(PolynomialSummand::new($this->getY($this->getX($i))));
 			$l = $l->mul($p);
 			$result->add($l);
 		}

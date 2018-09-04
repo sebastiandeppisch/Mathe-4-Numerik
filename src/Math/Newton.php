@@ -46,11 +46,11 @@ abstract class Newton{
 		if($gamma instanceof RationalNumber){
 			$gamma=$gamma->evaluate();
 		}
-		$p->addSummand(new FPolynomialSummand((float) $gamma));
+		$p->addSummand(PolynomialSummand::new((float) $gamma));
 		for($j=0;$j<$i;$j++){
 			$p2 = new Polynomial();
-			$p2->addSummand(new FPolynomialSummand(1, 1));
-			$p2->addSummand(new FPolynomialSummand(-$this->getX($j)));
+			$p2->addSummand(PolynomialSummand::new(1, 1));
+			$p2->addSummand(PolynomialSummand::new(-$this->getX($j)));
 			$p=$p->mul($p2);
 		}
 		return $p;

@@ -138,11 +138,12 @@ class Matrix{
 		return $html;
     }
     
-    public function toFloat(){
+    public function toFloat():Matrix{
         for($i=0;$i<$this->rows;$i++){
             for($j=0;$j<$this->cols;$j++){
                 $this->set($i, $j, $this->get($i, $j)->toFloat());
             }
         }
+        return $this;
     }
 }

@@ -9,11 +9,11 @@ class LagrangeChebyshev extends Lagrange{
 		$part = new Polynomial();
 		$x_j=$this->getX($j);
 		$x_i=$this->getX($i);
-		$part->addSummand(new FPolynomialSummand(1, 1));
-		$part->addSummand(new FPolynomialSummand(-$x_j, 0));
+		$part->addSummand(PolynomialSummand::new(1, 1));
+		$part->addSummand(PolynomialSummand::new(-$x_j, 0));
 
 		$p = new Polynomial();
-		$p->addSummand(new FPolynomialSummand(1/($x_i-$x_j), 0));
+		$p->addSummand(PolynomialSummand::new(1/($x_i-$x_j), 0));
 
 		$part = $part->mul($p);
 		return $part;
@@ -21,7 +21,7 @@ class LagrangeChebyshev extends Lagrange{
 
 	public function getL($i){
 		$p = new Polynomial();
-		$p->addSummand(new FPolynomialSummand(1, 0));
+		$p->addSummand(PolynomialSummand::new(1, 0));
 		for($j=0;$j<=$this->degree; $j++){
 			if($j !== $i){
 				$p = $p->mul($this->getLFactor($i, $j));

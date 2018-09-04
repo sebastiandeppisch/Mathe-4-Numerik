@@ -40,6 +40,29 @@ class NaturalCubicSplinesTest extends Testcase{
         $this->assertEquals(true, true);
     }
 
+    public function testLinearEquationSystemFloat(){
+        $splines = new NaturalCubicSplines([0.0, 1.0, 2.0, 3.0, 4.0, 5.0], [0.0, 1.0, -1.0, 2.0, 0.0, 1.0]);
+
+        $rMatrix = new Matrix(6, 6);
+        $rMatrix->setArray([
+            [1, 0, 0, 0, 0, 0],
+            [1, 4, 1, 0, 0, 0],
+            [0, 1, 4, 1, 0, 0],
+            [0, 0, 1, 4, 1, 0],
+            [0, 0, 0, 1, 4, 1],
+            [0, 0, 0, 0, 0, 1]
+        ]);
+        $rMatrix->mulScalar(new RationalNumber(1, 6));
+        $rMatrix->set(0, 0, 1);
+        $rMatrix->set(5, 5, 1);
+        $rMatrix->toFloat();
+
+        $les = $splines->getSystemOfLinearEquation();
+
+        $this->assertEquals($rMatrix, $les->getMatrix()->toFloat());
+        $this->assertEquals(true, true);
+    }
+
     public function testD(){
         $splines = new NaturalCubicSplines([-1, 0, 1], [1, 2, 1]);
         $this->assertEquals(new RationalNumber(1), $splines->getD(0));

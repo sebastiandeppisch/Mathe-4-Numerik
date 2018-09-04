@@ -2,18 +2,18 @@
 use PHPUnit\FrameWork\TestCase;
 
 use \Math\Polynomial;
-use \Math\RPolynomialSummand;
+use \Math\PolynomialSummand;
 
 class PolynomialTest extends Testcase{
     public function testToString(){
         $p = new Polynomial();
-        $p->addSummand(new RPolynomialSummand(3, 2));
+        $p->addSummand(PolynomialSummand::new(3, 2));
         $this->assertEquals("3x^2", $p->toString());
 
-        $p->addSummand(new RPolynomialSummand(5, 4));
+        $p->addSummand(PolynomialSummand::new(5, 4));
         $this->assertEquals("3x^2+5x^4", $p->toString());
 
-        $p->addSummand(new RPolynomialSummand(-7, 3));
+        $p->addSummand(PolynomialSummand::new(-7, 3));
         $this->assertEquals("3x^2-7x^3+5x^4", $p->toString());
     }
 
@@ -73,8 +73,8 @@ class PolynomialTest extends Testcase{
     }
 
     public function testAddZero(){
-        $a = new RPolynomialSummand(0);
-        $b = new RPolynomialSummand(0);
+        $a = PolynomialSummand::new(0);
+        $b = PolynomialSummand::new(0);
 
         $p = new Polynomial();
         $p->addSummand($a)->addSummand($b);

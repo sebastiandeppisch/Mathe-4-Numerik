@@ -86,7 +86,7 @@ class Polynomial{
 				}
 			}
 			$number = (int) $number;
-			$this->addSummand(new \Math\RPolynomialSummand($number, $exponentiation, $this->variable));
+			$this->addSummand(PolynomialSummand::new($number, $exponentiation, $this->variable));
 		}
 		$this->deleteEmpty();
 		return $this;
