@@ -20,7 +20,7 @@ class ButcherTable{
 		for($i=0;$i<=$n;$i++){
 			for($j=0;$j<=$n;$j++){
 				if($array[$i][$j] !== null){
-					$value = RationalNumber::fromString($array[$i][$j]);
+					$value = Number::fromString($array[$i][$j]);
 				}else{
 					$value= new RationalNumber(0);
 				}

@@ -1,6 +1,7 @@
 <?php 
 namespace Controller;
 use Math\Matrix;
+use Math\Number;
 abstract class Controller{
 
 	static protected $controller=["PolynomExampleController"];
@@ -28,11 +29,11 @@ abstract class Controller{
 				case "function":
 					$data = new \Math\MFunction($parameter);
 				break;
-				case "array-rational":
+				case "array":
 					$ps = explode(",", $parameter);
 					$data=[];
-					foreach($ps as $rational){
-						$data[] = \Math\RationalNumber::fromString($rational);
+					foreach($ps as $number){
+						$data[] = Number::fromString($number);
 					}
 				break;
 				case "matrix":

@@ -10,13 +10,13 @@ use Math\PartialMFunction;
 class CubicSplinesController extends Controller{
 	static protected $inputFields=[
 		[
-			"type"=>"array-rational",
+			"type"=>"array",
 			"name"=>"xnodes",
 			"description"=>"X-Werte",
 			"default" => "0,1,2,3",
 		],
 		[
-			"type"=>"array-rational",
+			"type"=>"array",
 			"name"=>"ynodes",
 			"description"=>"Y-Werte",
 			"default" => "1,2,1,4",

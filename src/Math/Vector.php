@@ -17,20 +17,7 @@ class Vector{
 
     public function set(int $i, $number){
         $this->checkCoordiantes($i);
-        $this->data[$i]=$this->convertNumber($number);
-    }
-
-    public function convertNumber($number):Number{
-        if($number instanceof Number){
-            return $number;
-        }
-        if(is_float($number)){
-            return new FloatNumber($number);
-        }
-        if(is_int($number)){
-            return new RationalNumber($number);
-        }
-        throw new \Excpetion($number." is not a correct number");
+        $this->data[$i]=Number::fromString($number);
     }
 
     public function get(int $i):Number{
@@ -57,13 +44,13 @@ class Vector{
 
 
     public function mulScalarRow($i, $number):Vector{
-        $number = $this->convertNumber($number);
+        $number = Number::fromString($number);
         $this->get($i)->mul($number);
         return $this;
     }
 
     public function mulScalar($number):Vector{
-        $number = $this->convertNumber($number);
+        $number = Number::fromString($number);
         for($i=0;$i<$this->getNRows();$i++){
             $this->mulScalarRow($i, $number);
         }

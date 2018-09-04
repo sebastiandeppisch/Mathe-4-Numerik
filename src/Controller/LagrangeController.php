@@ -69,7 +69,7 @@ class LagrangeController extends Controller{
 			]
 		],
 		[
-			"type"=>"array-rational",
+			"type"=>"array",
 			"name"=>"nodes",
 			"description"=>"Stützstellen angeben",
 			"default" => "0,1/2,1",

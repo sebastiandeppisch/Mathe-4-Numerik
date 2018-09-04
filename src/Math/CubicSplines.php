@@ -20,11 +20,9 @@ abstract class CubicSplines{
 		}
 		if($this->xNodes[$n] instanceof Number){
 			return $this->xNodes[$n]->copy();
+		}else{
+			return Number::fromString($this->xNodes[$n]);
 		}
-		if(is_int($this->xNodes[$n])){
-			return new RationalNumber($this->xNodes[$n]);
-		}
-		return $this->xNodes[$n];
 	}
 
 	public function getY($n):Number{
@@ -33,11 +31,9 @@ abstract class CubicSplines{
 		}
 		if($this->yNodes[$n] instanceof Number){
 			return $this->yNodes[$n]->copy();
+		}else{
+			return Number::fromString($this->yNodes[$n]);
 		}
-		if(is_int($this->yNodes[$n])){
-			return new RationalNumber($this->yNodes[$n]);
-		}
-		return $this->yNodes[$n];
 	}
 
 	public function getDegree():int{

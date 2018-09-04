@@ -3,11 +3,7 @@ namespace Math;
 
 class RPolynomialSummand extends PolynomialSummand{
     public function __construct($number, $exponentiation=0, $variable="x"){
-        if($number instanceof RationalNumber){
-            $this->number=$number;
-        }else{
-            $this->number= new RationalNumber($number, 1);
-        }
+        $this->number = Number::fromString($number);
         $this->exponentiation=$exponentiation;
         $this->variable=$variable;
     }

@@ -33,8 +33,8 @@ class CholeskyDecompositionTest extends Testcase{
 
         $result = new Matrix(3, 3);
         $result->setArray([
-            [1.0, 0.0, 0.0],
-            [2.0, 1.0, 0.0], 
+            [1.0, 0, 0],
+            [2.0, 1.0, 0], 
             [1.0, 2.0, 3.0]
         ]);
         $cholesky = new CholeskyDecomposition($a);

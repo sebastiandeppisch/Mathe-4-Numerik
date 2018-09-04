@@ -5,13 +5,13 @@ use Math\MFunction;
 class TwoDimensionalTestSeriesController extends Controller{
 	static protected $inputFields=[
 		[
-			"type"=>"array-rational",
+			"type"=>"array",
 			"name"=>"data-x",
 			"description"=>"Werte",
 			"default" => "1,2,3,4,5"
 		],
 		[
-			"type"=>"array-rational",
+			"type"=>"array",
 			"name"=>"data-y",
 			"description"=>"Werte",
 			"default" => "1/2,2,3,5,7"

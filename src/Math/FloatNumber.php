@@ -9,15 +9,12 @@ class FloatNumber extends Number{
 		$this->setF($f);
 	}
 
-	public function add(FloatNumber $rhs):FloatNumber{
+	protected function addFloat(FloatNumber $rhs):FloatNumber{
 		$this->setF($this->getF()+$rhs->getF());
 		return $this;
 	}
 
-	public function mul(Number $rhs):FloatNumber{
-		if(! $rhs instanceof FloatNumber){
-			$rhs = $rhs->toFloat();
-		}
+	protected function mulFloat(FloatNumber $rhs):FloatNumber{
 		$this->setF($this->getF()*$rhs->getF());
 		return $this;
 	}
@@ -64,5 +61,9 @@ class FloatNumber extends Number{
 
 	public function negate(){
 		return new FloatNumber(-1*$this->getF());
+	}
+
+	static public function fromString($stringNumber):Number{
+		return new FloatNumber(floatval($stringNumber));
 	}
 }

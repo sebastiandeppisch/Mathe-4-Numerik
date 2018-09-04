@@ -5,11 +5,11 @@ class TwoDimensionalTestSeries{
 	private $y; 
 	public function __construct(array $x, array $y){
 		foreach($x as &$number){
-			$number = $this->convertNumber($number);
+			$number = Number::fromString($number);
 		}
 
 		foreach($y as &$number){
-			$number = $this->convertNumber($number);
+			$number = Number::fromString($number);
 		}
 		
 		$this->x=$x;
@@ -35,20 +35,6 @@ class TwoDimensionalTestSeries{
 
 	public function getN(){
 		return count($this->x);
-	}
-
-
-	public function convertNumber($number):Number{
-		if($number instanceof Number){
-			return $number;
-		}
-		if(is_float($number)){
-			return new FloatNumber($number);
-		}
-		if(is_int($number)){
-			return new RationalNumber($number);
-		}
-		throw new \Excpetion($number." is not a correct number");
 	}
 
 	public function getArithmeticalAverageX():Number{

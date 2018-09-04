@@ -85,7 +85,7 @@ class NewtonController extends Controller{
 			]
 		],
 		[
-			"type"=>"array-rational",
+			"type"=>"array",
 			"name"=>"xnodes",
 			"description"=>"Stützstellen angeben",
 			"default" => "0,1/2,1",
@@ -97,7 +97,7 @@ class NewtonController extends Controller{
 			]
 		],
 		[
-			"type"=>"array-rational",
+			"type"=>"array",
 			"name"=>"ynodes",
 			"description"=>"Y-Wertangeben",
 			"default" => "1,2,3",

@@ -4,7 +4,7 @@ use Math\OneDimensionalTestSeries;
 class OneDimensionalTestSeriesController extends Controller{
 	static protected $inputFields=[
 		[
-			"type"=>"array-rational",
+			"type"=>"array",
 			"name"=>"data",
 			"description"=>"Werte",
 			"default" => "1/2,2,3,5,7"

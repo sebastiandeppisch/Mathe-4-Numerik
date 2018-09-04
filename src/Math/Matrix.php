@@ -26,23 +26,7 @@ class Matrix{
 
     public function set(int $i, int $j, $number){
         $this->checkCoordiantes($i, $j);
-        $this->data[$i][$j]=$this->convertNumber($number);
-    }
-
-    public function convertNumber($number):Number{
-        if($number instanceof Number){
-            return $number;
-        }
-        if(is_string($number)){
-            return RationalNumber::fromString($number);
-        }
-        if(is_float($number)){
-            return new FloatNumber($number);
-        }
-        if(is_int($number)){
-            return new RationalNumber($number);
-        }
-        throw new \Exception($number." is not a correct number");
+        $this->data[$i][$j]=Number::fromString($number);
     }
 
     public function get(int $i, int $j){
@@ -108,7 +92,7 @@ class Matrix{
     }
 
     public function mulScalarRow($i, $number):Matrix{
-        $number = $this->convertNumber($number);
+        $number = Number::fromString($number);
         for($j=0;$j<$this->getNCols();$j++){
             $this->get($i, $j)->mul($number);
         }
@@ -116,7 +100,7 @@ class Matrix{
     }
 
     public function mulScalar($number):Matrix{
-        $number = $this->convertNumber($number);
+        $number = Number::fromString($number);
         for($i=0;$i<$this->getNRows();$i++){
             $this->mulScalarRow($i, $number);
         }
@@ -152,5 +136,13 @@ class Matrix{
 		$html .="</tbody></table>";
 		$html .="</div>";
 		return $html;
-	}
+    }
+    
+    public function toFloat(){
+        for($i=0;$i<$this->rows;$i++){
+            for($j=0;$j<$this->cols;$j++){
+                $this->set($i, $j, $this->get($i, $j)->toFloat());
+            }
+        }
+    }
 }
