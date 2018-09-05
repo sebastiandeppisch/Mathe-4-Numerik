@@ -34,7 +34,7 @@ class Vector{
         }
     }
 
-    public function fromArray(array $newData):Vector{
+    static public function fromArray(array $newData):Vector{
         $vector = new Vector(count($newData));
         $vector->setArray($newData);
         return $vector;

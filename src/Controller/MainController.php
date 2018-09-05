@@ -14,6 +14,7 @@ class MainController{
 		"LagrangeController" => "Lagrange Interpolation",
 		"NewtonController" => "Newton Interpolation",
 		"CubicSplinesController" => "Kubische Splines Interpolation",
+		"NewtonCotesQuadraturController" => "Newton-Cotes-Quadratur",
 		"ButcherTableController" => "Butcher Tableu",
 		"CholeskyDecompositionController" => "Cholesky Zerlegung",
 		"GaussAlgorithmController" => "Gauss Algorithmus",
@@ -22,6 +23,8 @@ class MainController{
 		"TwoDimensionalTestSeriesController" => "2D Messreihe",
 	];
 
+	private $error = NULL;
+
 	public function __construct($controller){
 		if($controller !== NULL){
 			if(strpos($controller, 'Controller') !== false && in_array($controller, array_keys(self::$menu))){
@@ -29,7 +32,12 @@ class MainController{
 				$this->currentActive=$controller;
 				$controller="\Controller\\".$controller;
 				$this->controller = new $controller;
-				$this->controller->setData($_GET);
+				try{
+					$this->controller->setData($_GET);
+				}catch(\Exception $e){
+					$this->error= "Es ist ein Fehler aufgetreten:<br>".get_class($e)."<br>".$e->getMessage();
+				}
+				
 			}
 		}
 	}
@@ -41,6 +49,9 @@ class MainController{
 	} 
 
 	public function getOutputHTML(){
+		if($this->error !== NULL){
+			return $this->error;
+		}
 		if($this->controller !== NULL){
 			try{
 				$html =  $this->controller->getOutputHTML();
