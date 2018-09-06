@@ -1,11 +1,11 @@
 .polynomial{
-	display: flex; 
+	display: inline-block;
 }
 
 .polynomialsummand{
 	padding: 3px;
 	align-items: center;
-	display: flex; 
+	display: inline-block; 
 }
 
 .rationalnumber{
@@ -21,7 +21,7 @@
 }
 
 .polnomialsummand-outer{
-	display:flex;
+	display:inline-block;
 }
 
 .rationalnumber-fractionline{
@@ -31,7 +31,7 @@
 
 .polnomialsummand-sign{
 	align-items: center;
-	display: flex; 
+	display: inline-block; 
 }
 
 .result-outer{
