@@ -87,17 +87,17 @@ class NaturalCubicSplinesTest extends Testcase{
 
     public function testS(){
         $splines = new NaturalCubicSplines([-1, 0, 1], [1, 2, 1]);
-        $this->assertEquals("2-(3/2)x^2-(1/2)x^3", $splines->getS(0)->toString());
-        $this->assertEquals("2-(3/2)x^2+(1/2)x^3", $splines->getS(1)->toString());
+        $this->assertEquals("-(1/2)x^3-(3/2)x^2+2", $splines->getS(0)->toString());
+        $this->assertEquals("(1/2)x^3-(3/2)x^2+2", $splines->getS(1)->toString());
     }
 
     public function testS2(){
         $splines = new NaturalCubicSplines([0, 1, 2, 3, 4, 5], [0, 1, -1, 2, 0, 1]);
-        $this->assertEquals("(25/11)x-(14/11)x^3", $splines->getS(0)->toString());
-        $this->assertEquals("-(51/11)+(178/11)x-(153/11)x^2+(37/11)x^3", $splines->getS(1)->toString());
-        $this->assertEquals("(613/11)-(818/11)x+(345/11)x^2-(46/11)x^3", $splines->getS(2)->toString());
-        $this->assertEquals("-148+(1423/11)x-(402/11)x^2+(37/11)x^3", $splines->getS(3)->toString());
-        $this->assertEquals("(1636/11)-(1025/11)x+(210/11)x^2-(14/11)x^3", $splines->getS(4)->toString());
+        $this->assertEquals("-(14/11)x^3+(25/11)x", $splines->getS(0)->toString());
+        $this->assertEquals("(37/11)x^3-(153/11)x^2+(178/11)x-(51/11)", $splines->getS(1)->toString());
+        $this->assertEquals("-(46/11)x^3+(345/11)x^2-(818/11)x+(613/11)", $splines->getS(2)->toString());
+        $this->assertEquals("(37/11)x^3-(402/11)x^2+(1423/11)x-148", $splines->getS(3)->toString());
+        $this->assertEquals("-(14/11)x^3+(210/11)x^2-(1025/11)x+(1636/11)", $splines->getS(4)->toString());
     }
 
     public function testConstructWithRationalNumber(){

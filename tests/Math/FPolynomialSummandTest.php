@@ -121,16 +121,16 @@ class FPolynomialSummandTest extends Testcase{
     public function testConverToFloat(){
         $p = new Math\Polynomial();
         $p->addString("2x^2+3x^3+8x^2");
-        $this->assertEquals("10x^2+3x^3", $p->toString());
+        $this->assertEquals("3x^3+10x^2", $p->toString());
         $p->toFloat();
-        $this->assertEquals("10.0x^2+3.0x^3", $p->toString());
+        $this->assertEquals("3.0x^3+10.0x^2", $p->toString());
 
         $a = PolynomialSummand::new(3.5, 2);
         $p2 = new \Math\Polynomial();
         $p2->addSummand($a);
         $this->assertEquals("3.5x^2", $p2->toString());
         $p->add($p2);
-        $this->assertEquals("13.5x^2+3.0x^3", $p->toString());
+        $this->assertEquals("3.0x^3+13.5x^2", $p->toString());
        
     }
 
@@ -151,6 +151,6 @@ class FPolynomialSummandTest extends Testcase{
         $e = new Polynomial();
         $e->addString("13x^2-10x+7x^5")->toFloat();
         $f = $d->mul($e)->toFloat();
-        $this->assertEquals("-50.0x^2-35.0x^3+130.0x^4+35.0x^6+70.0x^7", $f->toString());
+        $this->assertEquals("70.0x^7+35.0x^6+130.0x^4-35.0x^3-50.0x^2", $f->toString());
     }
 }

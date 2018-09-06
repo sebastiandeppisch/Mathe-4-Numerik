@@ -147,8 +147,6 @@ class GausLRTest extends Testcase{
 
 
 		$result = $gauss->solveLR();
-		echo "L".$result->getL();
-		echo "R".$result->getR();
 		$this->assertEquals(Matrix::fromArray([
 			[0, 0, 0, 0],
 			[1, 0, 0, 0],
