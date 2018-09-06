@@ -76,14 +76,14 @@ class CubicSplinesController extends Controller{
 		$splines = $this->getSplines();
 		$les = $splines->getSystemOfLinearEquation();
 		$html = $les->toHTML();
-		$html.="<table class='table'><thead><tr><th>M</th><th>D</th><th>C</th><th>S</th></tr></thead><body>";
+		$html.="<table class='table'><thead><tr><th>M</th><th>d</th><th>c</th><th>s</th></tr></thead><body>";
 		for($i=0;$i<=$splines->getDegree();$i++){
 			$html.="<tr>";
 			$html.="<td>M<sub>".$i."</sub>=".$splines->getM($i)->toHTML()."</td>";
 			if($i<$splines->getDegree()){
-				$html.="<td>D<sub>".$i."</sub>=".$splines->getD($i)->toHTML()."</td>";
-				$html.="<td>C<sub>".$i."</sub>=".$splines->getC($i)->toHTML()."</td>";
-				$html.="<td>S<sub>".$i."</sub>(x)=".$splines->getS($i)->toHTML()."</td>";
+				$html.="<td>d<sub>".$i."</sub>=".$splines->getD($i)->toHTML()."</td>";
+				$html.="<td>c<sub>".$i."</sub>=".$splines->getC($i)->toHTML()."</td>";
+				$html.="<td>s<sub>".$i."</sub>(x)=".$splines->getS($i)->toHTML()."</td>";
 			}
 			$html.="</tr>";
 		}
