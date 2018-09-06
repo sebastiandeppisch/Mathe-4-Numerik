@@ -27,7 +27,7 @@ class GaussAlgorithmController extends Controller{
 			for($j=0;$j<$n;$j++){
 				$a->set($i, $j, $this->data["matrix"]->get($i, $j));
 			}
-			$b->set($i, $this->data["matrix"]->get($i, $n-1));
+			$b->set($i, $this->data["matrix"]->get($i, $n));
 		}
 		$this->a=$a;
 		$this->b=$b;
