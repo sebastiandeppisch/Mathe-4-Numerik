@@ -155,17 +155,28 @@ class ButcherTable{
 				<td>'.$beta->toHTML().'</td>
 			</tr></table><hr>';
 
-		$html.="Konsistenzordnung: ".$this->getConistency()."<br>k für explizit:<br>";
+		$html.="Konsistenzordnung: ".$this->getConistency()."<br>";
 		for($i=1;$i<=count($this->alphas);$i++){
 			$html.="k<sub>".$i."</sub> = f(";
-			$html.="t+".$this->getGamma($i)->toHTML()."h, ";
-			$html.="u + h(";
-			$temp= [];
-			for($j=1;$j<=$i-1;$j++){
-				$temp[]=$this->getAlpha($i, $j)->toHTML()."k<sub>".$j."</sub>";
+			$html.="t";
+			if($this->getGamma($i)->evaluate() != 0){
+				$html.="+".$this->getGamma($i)->toHTML()."h";
 			}
-			$html.=implode("+", $temp);
-			$html.=")";
+		
+			$html.=", u";
+			$temp= [];
+			for($j=1;$j<=count($this->alphas);$j++){
+				if($this->getAlpha($i, $j)->evaluate() != 0){
+					$temp[]=$this->getAlpha($i, $j)->toHTML()."k<sub>".$j."</sub>";
+				}
+				
+			}
+			if(count($temp) > 0){
+				$html.=" + h(";
+				$html.=implode("+", $temp);
+				$html.=")";
+			}
+			
 
 			$html.=")<br>";
 		}
