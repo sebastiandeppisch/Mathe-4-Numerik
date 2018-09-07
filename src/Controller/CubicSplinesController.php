@@ -84,6 +84,8 @@ class CubicSplinesController extends Controller{
 				$html.="<td>d<sub>".$i."</sub>=".$splines->getD($i)->toHTML()."</td>";
 				$html.="<td>c<sub>".$i."</sub>=".$splines->getC($i)->toHTML()."</td>";
 				$html.="<td>s<sub>".$i."</sub>(x)=".$splines->getS($i)->toHTML()."</td>";
+			}else{
+				$html.="<td>---</td><td>---</td><td>---</td>";
 			}
 			$html.="</tr>";
 		}
